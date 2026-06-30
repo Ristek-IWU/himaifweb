@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #031636;
+  --color-secondary: #005bc1;
+  --color-background: #f8f9ff;
+  --color-surface: #f8f9ff;
+  --color-on-surface: #0b1c30;
+  --color-on-surface-variant: #44474e;
+  --color-primary-container: #1a2b4c;
+  --color-on-primary: #ffffff;
+  --color-secondary-container: #d8e2ff;
+  --color-on-secondary-container: #001d35;
+  --color-surface-container-low: #eff4ff;
+  --color-outline-variant: #c5c6cf;
+  --color-tertiary-container: #292c2e;
+  --color-surface-variant: #d3e4fe;
+  --color-tertiary-fixed-dim: #c4c7c9;
+  --color-surface-container-highest: #d3e4fe;
+  --color-surface-container-lowest: #ffffff;
+  --color-error: #ba1a1a;
+  --color-on-tertiary: #ffffff;
+  --color-on-error: #ffffff;
+  --color-tertiary-fixed: #e0e3e5;
+  --color-surface-container-high: #dce9ff;
+  --color-inverse-on-surface: #eaf1ff;
+  --color-on-primary-container: #8293ba;
+  --color-tertiary: #141819;
+  --color-surface-bright: #f8f9ff;
+  --color-primary-fixed: #d8e2ff;
+  --color-surface-tint: #4e5e82;
+  --color-secondary-fixed-dim: #adc6ff;
+  --color-on-error-container: #93000a;
+  --color-on-tertiary-fixed-variant: #444749;
+  --color-inverse-surface: #213145;
+  --color-on-secondary: #ffffff;
+  --color-secondary-fixed: #d8e2ff;
+  --color-outline: #75777f;
+  --color-on-primary-fixed: #071b3b;
+  --color-on-secondary-fixed-variant: #004a77;
+  --color-surface-dim: #cbdbf5;
+  --color-on-background: #0b1c30;
+  --color-primary-fixed-dim: #b6c6f0;
+  --color-on-primary-fixed-variant: #364669;
+  --color-surface-container: #e5eeff;
+  --color-on-tertiary-fixed: #191c1e;
+  --color-inverse-primary: #b6c6f0;
+  --color-error-container: #ffdad6;
+  --color-on-secondary-fixed: #001a41;
+}
+
+.dark {
+  --color-background: #050c18;
+  --color-surface: #050c18;
+  --color-on-surface: #d3e4fe;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #031636;
+}
+
+.dark html {
+  background-color: black;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #031636;
+  color: #0b1c30;
+  min-height: 100vh;
+}
+
+.dark body {
+  background-color: black;
+  color: #d3e4fe;
+}
+
+/* Material Symbols — default outlined style */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* Hero background grid pattern */
+.hero-pattern {
+  background-image: radial-gradient(circle at 2px 2px, rgba(5, 91, 193, 0.08) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+/* Floating animations for tech-pills */
+@keyframes float-1 {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes float-2 {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes float-3 {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes float-4 {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-9px); }
+}
+
+.animate-float-1 {
+  animation: float-1 4.5s ease-in-out infinite;
+}
+.animate-float-2 {
+  animation: float-2 6s ease-in-out infinite;
+}
+.animate-float-3 {
+  animation: float-3 5.2s ease-in-out infinite;
+}
+.animate-float-4 {
+  animation: float-4 5.7s ease-in-out infinite;
+}
+
+/* Horizontal Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+/* Seamless Marquee Animation (Translates 100%) */
+@keyframes marquee-seamless {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee-seamless {
+  display: flex;
+  width: max-content;
+  animation: marquee-seamless 25s linear infinite;
+}
