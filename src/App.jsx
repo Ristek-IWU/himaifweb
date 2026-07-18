@@ -8,10 +8,13 @@ import Contact from './components/home/Contact'
 import Footer from './components/home/Footer'
 import StrukturOrganisasi from './components/struktur'
 import Tentang from './components/tentang'
-import InShow from './components/InShow'
+import InShow from './components/inshow'
 
 function App() {
   const [activeTab, setActiveTab] = useState('home')
+  const [isPortalActive, setIsPortalActive] = useState(() => {
+    return sessionStorage.getItem('himaif_portal_open') === 'true'
+  })
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -43,36 +46,44 @@ function App() {
     }
   }, [activeTab])
 
+  const mainPage = activeTab === 'structure' ? 'structure' : activeTab === 'tentang' ? 'tentang' : 'home'
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-background dark:bg-[#050c18] text-on-surface dark:text-[#d3e4fe] selection:bg-secondary-container selection:text-on-secondary-container">
-      <Navbar active={activeTab} setActive={setActiveTab} />
-      <main className="pt-[120px]">
-        {activeTab === 'structure' ? (
-          <StrukturOrganisasi />
-        ) : activeTab === 'tentang' ? (
-          <Tentang />
-        ) : (
-          <>
-            <div id="home">
-              <Hero />
+      {!isPortalActive && (
+        <>
+          <Navbar active={activeTab} setActive={setActiveTab} />
+          <main className="pt-20 md:pt-[120px]">
+            <div key={mainPage} className="animate-fade-in-up">
+              {activeTab === 'structure' ? (
+                <StrukturOrganisasi />
+              ) : activeTab === 'tentang' ? (
+                <Tentang />
+              ) : (
+                <>
+                  <div id="home">
+                    <Hero />
+                  </div>
+                  <div id="vision">
+                    <Vision />
+                  </div>
+                  <div id="about">
+                    <About />
+                  </div>
+                  <div id="projects">
+                    <Projects />
+                  </div>
+                  <div id="contact">
+                    <Contact />
+                  </div>
+                </>
+              )}
             </div>
-            <div id="vision">
-              <Vision />
-            </div>
-            <div id="about">
-              <About />
-            </div>
-            <div id="projects">
-              <Projects />
-            </div>
-            <div id="contact">
-              <Contact />
-            </div>
-          </>
-        )}
-      </main>
-      <Footer />
-      <InShow />
+          </main>
+          <Footer />
+        </>
+      )}
+      <InShow onOpenChange={setIsPortalActive} />
     </div>
   )
 }

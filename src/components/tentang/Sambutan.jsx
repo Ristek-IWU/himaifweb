@@ -1,4 +1,4 @@
-import Reveal from './Reveal'
+import Reveal from '../Reveal'
 import Placeholder from './Placeholder'
 import { ketuaData } from './data/data'
 
@@ -17,7 +17,7 @@ export default function Sambutan() {
           <Reveal className="md:col-span-5">
             <div className="group relative bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
               {/* Left 3D Ribbon */}
-              <div className="absolute left-3 top-0 bottom-[-12px] w-10 rounded-t-lg bg-[#005bc1] dark:bg-[#005bc1] flex flex-col items-center pt-5 z-10 shadow-md">
+              <div className="absolute left-2.5 sm:left-3 top-0 bottom-[-12px] w-9 sm:w-10 rounded-t-lg bg-[#005bc1] dark:bg-[#005bc1] flex flex-col items-center pt-5 z-10 shadow-md">
                 <span
                   className="text-[9px] font-extrabold text-white/80 uppercase tracking-[0.2em] whitespace-nowrap"
                   style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
@@ -28,7 +28,7 @@ export default function Sambutan() {
                 <div className="absolute bottom-0 left-full w-0 h-0 border-t-[12px] border-t-[#003d80] dark:border-t-[#003d80] border-r-[12px] border-r-transparent"></div>
               </div>
               {/* Foto */}
-              <div className="pl-14 pr-3 py-3">
+              <div className="pl-12 sm:pl-14 pr-3 py-3">
                 {image ? (
                   <img
                     src={image}

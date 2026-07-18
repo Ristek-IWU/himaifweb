@@ -1,4 +1,4 @@
-import Reveal from './Reveal'
+import Reveal from '../Reveal'
 import { programStudiData } from './data/data'
 import pythonSvg from '../../assets/python-svgrepo-com.svg'
 import jsSvg from '../../assets/js-svgrepo-com.svg'

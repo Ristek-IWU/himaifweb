@@ -12,6 +12,7 @@ export default function Navbar({ active, setActive }) {
 
   const langRef = useRef(null)
   const langRefMobile = useRef(null)
+  const headerRef = useRef(null)
 
   // Toggle dark class on root document element
   useEffect(() => {
@@ -39,6 +40,9 @@ export default function Navbar({ active, setActive }) {
       if (langRefMobile.current && !langRefMobile.current.contains(event.target)) {
         setIsMobileLangDropdownOpen(false)
       }
+      if (headerRef.current && !headerRef.current.contains(event.target)) {
+        setIsMobileMenuOpen(false)
+      }
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
@@ -62,7 +66,7 @@ export default function Navbar({ active, setActive }) {
   const activeLangObj = languages.find(l => l.code === lang) || languages[0]
 
   return (
-    <header className="fixed top-0 w-full z-50 flex flex-col">
+    <header ref={headerRef} className="fixed top-0 w-full z-50 flex flex-col">
       {/* Main Navbar */}
       <nav
         className={`w-full transition-all duration-300 ${

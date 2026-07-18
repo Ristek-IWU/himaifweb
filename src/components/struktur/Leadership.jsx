@@ -49,14 +49,14 @@ export default function Leadership() {
   }
 
   const renderProfileCard = (person, size = 'lg') => {
-    const imgSize = size === 'lg' ? 'w-36 h-36' : 'w-28 h-28'
-    const nameSize = size === 'lg' ? 'text-lg' : 'text-base'
-    const cardWidth = size === 'lg' ? 'w-full md:w-80' : 'w-full md:w-72'
+    const imgSize = size === 'lg' ? 'w-32 h-32 sm:w-36 sm:h-36' : 'w-28 h-28'
+    const nameSize = size === 'lg' ? 'text-base sm:text-lg' : 'text-base'
+    const cardWidth = size === 'lg' ? 'w-full sm:w-80' : 'w-full sm:w-72'
 
     return (
-      <div className={`group relative bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl pl-20 pr-6 py-6 ${cardWidth} shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300 hover:scale-[1.01] cursor-default z-10`}>
+      <div className={`group relative bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl pl-16 pr-4 sm:pl-20 sm:pr-6 py-6 ${cardWidth} shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300 hover:scale-[1.01] cursor-default z-10`}>
         {/* Left 3D Ribbon — Teal for Core Leaders */}
-        <div className="absolute left-5 top-0 bottom-[-12px] w-12 rounded-t-lg bg-[#0091ae] dark:bg-[#006377] flex flex-col items-center pt-6 z-10 shadow-md">
+        <div className="absolute left-3.5 sm:left-5 top-0 bottom-[-12px] w-10 sm:w-12 rounded-t-lg bg-[#0091ae] dark:bg-[#006377] flex flex-col items-center pt-6 z-10 shadow-md">
           {/* Vertical Role Text */}
           <span className="text-[9px] font-extrabold text-white/70 uppercase tracking-[0.2em] whitespace-nowrap"
             style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
@@ -120,19 +120,24 @@ export default function Leadership() {
 
       <div className="relative flex flex-col items-center w-full">
         {/* Row 1: Ketua & Wakil */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-32 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-32 relative w-full justify-items-center px-4 sm:px-0">
           {coreLeaders.map((leader) => (
             <React.Fragment key={leader.name}>
               {renderProfileCard(leader, 'lg')}
             </React.Fragment>
           ))}
           <div className="hidden md:block absolute top-1/2 left-1/4 right-1/4 h-0.5 border-t-2 border-dashed border-[#005bc1]/35 dark:border-[#60a5fa]/30 -translate-y-1/2 z-0"></div>
+          
+          {/* Mobile connector between Ketua and Wakil */}
+          <div className="block md:hidden absolute top-[calc(50%-24px)] left-1/2 -translate-x-1/2 h-12 w-0.5 border-l-2 border-dashed border-[#005bc1]/35 dark:border-[#60a5fa]/30 z-0"></div>
         </div>
 
         <div className="h-16 w-0.5 border-l-2 border-dashed border-[#005bc1]/35 dark:border-[#60a5fa]/30 my-2"></div>
 
         {/* Row 2: Sekjen */}
-        {renderProfileCard(secGen, 'lg')}
+        <div className="w-full flex justify-center px-4 sm:px-0">
+          {renderProfileCard(secGen, 'lg')}
+        </div>
 
         <div className="h-16 w-0.5 border-l-2 border-dashed border-[#005bc1]/35 dark:border-[#60a5fa]/30 mt-2"></div>
       </div>

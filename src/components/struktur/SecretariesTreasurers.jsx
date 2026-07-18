@@ -59,14 +59,17 @@ export default function SecretariesTreasurers() {
           <div className="flex justify-center"><div className="w-0.5 h-full border-l-2 border-dashed border-[#005bc1]/35 dark:border-[#60a5fa]/30"></div></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full z-10">
+        {/* Mobile vertical line connector */}
+        <div className="block md:hidden absolute top-0 bottom-16 w-0.5 border-l-2 border-dashed border-[#005bc1]/35 dark:border-[#60a5fa]/30 -z-10"></div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full z-10 px-4 sm:px-0">
           {bphStaff.map((person) => (
             <div
               key={person.name}
-              className="group relative bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl pl-20 pr-5 py-5 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300 hover:scale-[1.01] cursor-default"
+              className="group relative bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl pl-16 pr-4 sm:pl-20 sm:pr-5 py-5 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300 hover:scale-[1.01] cursor-default"
             >
               {/* Left 3D Ribbon — Gray for Sekre & Bendahara */}
-              <div className="absolute left-4 top-0 bottom-[-10px] w-11 rounded-t-lg bg-[#6b7280] flex flex-col items-center pt-5 z-10 shadow-md">
+              <div className="absolute left-3.5 sm:left-4 top-0 bottom-[-10px] w-9 sm:w-11 rounded-t-lg bg-[#6b7280] flex flex-col items-center pt-5 z-10 shadow-md">
                 <span className="text-[8px] font-extrabold text-white/70 uppercase tracking-[0.15em] whitespace-nowrap"
                   style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
                   {person.role}

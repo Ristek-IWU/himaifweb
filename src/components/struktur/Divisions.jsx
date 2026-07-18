@@ -126,8 +126,11 @@ export default function Divisions() {
           ))}
         </div>
 
+        {/* Mobile vertical line connector */}
+        <div className="block lg:hidden absolute top-0 bottom-16 w-0.5 border-l-2 border-dashed border-[#005bc1]/35 dark:border-[#60a5fa]/30 -z-10"></div>
+
         {/* Card Grid layout — 3 columns for breathing room */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full z-10 px-4 sm:px-0">
           {divisions.map((div) => (
             <div
               key={div.name}

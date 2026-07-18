@@ -43,7 +43,7 @@ export default function Hero() {
             <span className="relative inline-block my-4 sm:my-5 self-start">
               {/* Teks Watermark di Belakang */}
               <span 
-                className="absolute -top-6 sm:-top-8 text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight"
+                className="absolute -top-5 sm:-top-8 text-2xl sm:text-4xl md:text-5xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight"
                 style={{ left: '15px', transform: 'none' }}
               >
                 Informatika IWU
@@ -77,8 +77,8 @@ export default function Hero() {
         {/* Right Content (Interactive Floating Portal) */}
         <div className="lg:col-span-5 flex justify-center lg:justify-end relative">
           {/* Main Square Orbit Frame */}
-          <div className="relative w-72 h-72 md:w-80 md:h-80 bg-white dark:bg-gradient-to-br dark:from-[#0d1b33] dark:to-[#0a1628] border border-[#c5c6cf]/60 dark:border-[#60a5fa]/20 rounded-[32px] flex items-center justify-center shadow-lg dark:shadow-[0_10px_40px_rgba(96,165,250,0.15)] select-none">
-            <img src={logoHima} alt="HIMA Logo" className="w-44 h-44 object-contain" />
+          <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 bg-white dark:bg-gradient-to-br dark:from-[#0d1b33] dark:to-[#0a1628] border border-[#c5c6cf]/60 dark:border-[#60a5fa]/20 rounded-[32px] flex items-center justify-center shadow-lg dark:shadow-[0_10px_40px_rgba(96,165,250,0.15)] select-none">
+            <img src={logoHima} alt="HIMA Logo" className="w-36 h-36 sm:w-44 sm:h-44 object-contain" />
             
             {/* Dashed outer orbit guide lines */}
             <div className="absolute inset-0 rounded-[36px] border border-dashed border-[#005bc1]/10 dark:border-[#60a5fa]/10 scale-105 pointer-events-none"></div>

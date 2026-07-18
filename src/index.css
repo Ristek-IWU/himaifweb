@@ -49,6 +49,31 @@
   --color-inverse-primary: #b6c6f0;
   --color-error-container: #ffdad6;
   --color-on-secondary-fixed: #001a41;
+
+  --animate-fade-in-up: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-orbit-rotate: orbit-rotate 25s linear infinite;
+  --animate-orbit-rotate-reverse: orbit-rotate-reverse 35s linear infinite;
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes orbit-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes orbit-rotate-reverse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+  }
 }
 
 .dark {

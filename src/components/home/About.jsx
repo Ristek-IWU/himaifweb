@@ -1,4 +1,5 @@
 import React from 'react'
+import Reveal from '../Reveal'
 import logoHima from '../../assets/logo_hima.png'
 import solidityLogo from '../../assets/light-solidity-svgrepo-com.svg'
 import pythonLogo from '../../assets/python-svgrepo-com.svg'
@@ -70,23 +71,25 @@ export default function About() {
 
       <div className="max-w-[1120px] mx-auto px-6">
         {/* Section Heading */}
-        <div className="text-center mb-8">
-          <div className="relative inline-block">
-            <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-5xl sm:text-6xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight">
-              About
-            </span>
-            <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-3">
-              <h2 className="text-[#031636] dark:text-white text-2xl sm:text-3xl font-serif font-extrabold tracking-tight">
-                Tentang & <span className="text-[#005bc1] dark:text-[#60a5fa]">Nilai Inti</span>
-              </h2>
+        <Reveal>
+          <div className="text-center mb-8">
+            <div className="relative inline-block">
+              <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-5xl sm:text-6xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight">
+                About
+              </span>
+              <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-3">
+                <h2 className="text-[#031636] dark:text-white text-2xl sm:text-3xl font-serif font-extrabold tracking-tight">
+                  Tentang & <span className="text-[#005bc1] dark:text-[#60a5fa]">Nilai Inti</span>
+                </h2>
+              </div>
             </div>
           </div>
-        </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Sisi Kiri: Hybrid Collage 3 Foto (Top Wide, Bottom Tilted) */}
-          <div className="lg:col-span-5 flex flex-col gap-4 w-full relative">
+          <Reveal className="lg:col-span-5 flex flex-col gap-4 w-full relative">
             {/* Decorative Dashed Background Accent */}
             <div className="absolute -inset-3 border border-dashed border-secondary/20 dark:border-[#60a5fa]/15 rounded-3xl pointer-events-none -z-10 transform translate-y-2"></div>
             
@@ -122,56 +125,62 @@ export default function About() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#031636]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Sisi Kanan: Vision-Style Cards & Categories Grid */}
           <div className="lg:col-span-7 space-y-6">
             
             {/* 1. Kartu Utama Tentang Kami */}
-            <div className="bg-[#f0f2f8] dark:bg-[#0d1b33]/60 border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl p-6 pl-24 pr-8 relative shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300 hover:scale-[1.01] cursor-default min-h-[140px] flex flex-col justify-center">
-              {/* 3D Ribbon dengan Logo HIMA */}
-              <div className="absolute left-6 top-0 bottom-[-12px] w-12 rounded-t-lg bg-[#031636] flex flex-col items-center pt-3.5 z-10 shadow-md">
-                <div className="w-8 h-8 rounded-full bg-white dark:bg-[#0a1628] flex items-center justify-center shadow-sm overflow-hidden p-0.5">
-                  <img src={logoHima} alt="Logo HIMA" className="w-full h-full object-contain" />
+            <Reveal delay={100}>
+              <div className="bg-[#f0f2f8] dark:bg-[#0d1b33]/60 border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl p-5 pl-[72px] pr-5 sm:p-6 sm:pl-24 sm:pr-8 relative shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300 hover:scale-[1.01] cursor-default min-h-[140px] flex flex-col justify-center">
+                {/* 3D Ribbon dengan Logo HIMA */}
+                <div className="absolute left-4 sm:left-6 top-0 bottom-[-12px] w-10 sm:w-12 rounded-t-lg bg-[#031636] flex flex-col items-center pt-3.5 z-10 shadow-md">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white dark:bg-[#0a1628] flex items-center justify-center shadow-sm overflow-hidden p-0.5">
+                    <img src={logoHima} alt="Logo HIMA" className="w-full h-full object-contain" />
+                  </div>
+                  {/* Ribbon folding border */}
+                  <div className="absolute bottom-0 left-full w-0 h-0 border-t-[12px] border-t-[#010a1b] border-r-[12px] border-r-transparent"></div>
                 </div>
-                {/* Ribbon folding border */}
-                <div className="absolute bottom-0 left-full w-0 h-0 border-t-[12px] border-t-[#010a1b] border-r-[12px] border-r-transparent"></div>
+                
+                <div>
+                  <span className="inline-block text-[10px] font-extrabold text-secondary dark:text-[#60a5fa] uppercase tracking-widest mb-1">
+                    Pengenalan
+                  </span>
+                  <h3 className="text-lg font-bold text-primary dark:text-[#d3e4fe] mb-2">HIMAIF IWU</h3>
+                  <p className="text-on-surface-variant dark:text-[#d3e4fe]/70 text-sm lg:text-base leading-relaxed">
+                    Kami adalah pusat akselerasi talenta digital masa depan, menjembatani dunia akademik dengan kebutuhan nyata industri teknologi modern.
+                  </p>
+                </div>
               </div>
-              
-              <div>
-                <span className="inline-block text-[10px] font-extrabold text-secondary dark:text-[#60a5fa] uppercase tracking-widest mb-1">
-                  Pengenalan
-                </span>
-                <h3 className="text-lg font-bold text-primary dark:text-[#d3e4fe] mb-2">HIMAIF IWU</h3>
-                <p className="text-on-surface-variant dark:text-[#d3e4fe]/70 text-sm lg:text-base leading-relaxed">
-                  Kami adalah pusat akselerasi talenta digital masa depan, menjembatani dunia akademik dengan kebutuhan nyata industri teknologi modern.
-                </p>
-              </div>
-            </div>
+            </Reveal>
 
             {/* 2. Grid Kategori 2x2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {categories.map((cat, idx) => (
-                <div
+                <Reveal
                   key={idx}
-                  className="bg-[#f0f2f8] dark:bg-[#0d1b33]/60 border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl p-4 pl-20 pr-4 relative min-h-[72px] flex items-center shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300 hover:scale-[1.01] cursor-default"
+                  delay={150 + idx * 80}
                 >
-                  {/* 3D Ribbon Kecil dengan Kontainer Bulat Putih untuk SVG */}
-                  <div className={`absolute left-4 top-0 bottom-[-8px] w-10 rounded-t-lg flex flex-col items-center pt-2.5 z-10 ${cat.tagBg} shadow-sm`}>
-                    <div className="w-7 h-7 rounded-full bg-white dark:bg-[#0a1628] flex items-center justify-center shadow-sm">
-                      <img
-                        src={cat.icon}
-                        alt={`${cat.title} Logo`}
-                        className="w-4.5 h-4.5 object-contain"
-                      />
+                  <div
+                    className="bg-[#f0f2f8] dark:bg-[#0d1b33]/60 border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl p-4 pl-[68px] pr-4 sm:pl-20 sm:pr-4 relative min-h-[72px] flex items-center shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300 hover:scale-[1.01] cursor-default"
+                  >
+                    {/* 3D Ribbon Kecil dengan Kontainer Bulat Putih untuk SVG */}
+                    <div className={`absolute left-3 sm:left-4 top-0 bottom-[-8px] w-9 sm:w-10 rounded-t-lg flex flex-col items-center pt-2.5 z-10 ${cat.tagBg} shadow-sm`}>
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white dark:bg-[#0a1628] flex items-center justify-center shadow-sm">
+                        <img
+                          src={cat.icon}
+                          alt={`${cat.title} Logo`}
+                          className="w-4.5 h-4.5 object-contain"
+                        />
+                      </div>
+                      <div className={`absolute bottom-0 left-full w-0 h-0 border-t-[8px] ${cat.foldBorder} border-r-[8px] border-r-transparent`}></div>
                     </div>
-                    <div className={`absolute bottom-0 left-full w-0 h-0 border-t-[8px] ${cat.foldBorder} border-r-[8px] border-r-transparent`}></div>
+                    
+                    <span className="text-[#031636] dark:text-[#d3e4fe] font-bold text-sm lg:text-base leading-snug">
+                      {cat.title}
+                    </span>
                   </div>
-                  
-                  <span className="text-[#031636] dark:text-[#d3e4fe] font-bold text-sm lg:text-base leading-snug">
-                    {cat.title}
-                  </span>
-                </div>
+                </Reveal>
               ))}
             </div>
 

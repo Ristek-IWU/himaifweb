@@ -1,4 +1,4 @@
-import Reveal from './Reveal'
+import Reveal from '../Reveal'
 import { heroData } from './data/data'
 
 /**
@@ -51,9 +51,9 @@ export default function Hero() {
           </div>
 
           {/* Card Sejarah — gaya ribbon */}
-          <div className="group relative max-w-3xl mx-auto bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl pl-20 pr-8 py-10 md:py-12 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300 text-left">
+          <div className="group relative max-w-3xl mx-auto bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl pl-16 pr-5 sm:pl-20 sm:pr-8 py-8 sm:py-10 md:py-12 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300 text-left">
             {/* Left 3D Ribbon — dengan logo di dalam */}
-            <div className="absolute left-5 top-0 bottom-[-16px] w-12 rounded-t-lg bg-[#005bc1] dark:bg-[#005bc1] flex flex-col items-center pt-4 z-10 shadow-md">
+            <div className="absolute left-3.5 sm:left-5 top-0 bottom-[-16px] w-10 sm:w-12 rounded-t-lg bg-[#005bc1] dark:bg-[#005bc1] flex flex-col items-center pt-4 z-10 shadow-md">
               {/* Logo HIMA di dalam pita */}
               <div className="w-7 h-7 rounded-lg overflow-hidden bg-white/20 p-0.5 mb-1.5 flex-shrink-0">
                 <img

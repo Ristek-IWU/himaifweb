@@ -1,4 +1,5 @@
 import React from 'react'
+import Reveal from '../Reveal'
 import proyek1 from '../../assets/proyek1.png'
 import proyek2 from '../../assets/proyek2.png'
 import proyek3 from '../../assets/proyek3.png'
@@ -33,31 +34,33 @@ export default function Projects() {
   return (
     <section id="projects" className="py-16 bg-[#e1e8f5] dark:bg-gradient-to-b dark:from-[#0a1628] dark:to-[#0f1729] overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-6 mb-10">
-        <div className="text-center">
-          {/* Wrapper relatif untuk teks watermark */}
-          <div className="relative inline-block">
-            {/* Teks Watermark di Belakang */}
-            <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-5xl sm:text-6xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight">
-              Karya Mahasiswa
-            </span>
+        <Reveal>
+          <div className="text-center">
+            {/* Wrapper relatif untuk teks watermark */}
+            <div className="relative inline-block">
+              {/* Teks Watermark di Belakang */}
+              <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-5xl sm:text-6xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight">
+                Karya Mahasiswa
+              </span>
 
-            {/* Kotak Utama — Persegi dengan Garis Putus-Putus Biru */}
-            <div className="relative inline-flex items-center gap-2 bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-3">
-              <h2 className="text-[#031636] dark:text-white text-2xl sm:text-3xl font-serif font-extrabold tracking-tight">
-                Showcase <span className="text-[#005bc1] dark:text-[#60a5fa]">Proyek</span>
-              </h2>
+              {/* Kotak Utama — Persegi dengan Garis Putus-Putus Biru */}
+              <div className="relative inline-flex items-center gap-2 bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-3">
+                <h2 className="text-[#031636] dark:text-white text-2xl sm:text-3xl font-serif font-extrabold tracking-tight">
+                  Showcase <span className="text-[#005bc1] dark:text-[#60a5fa]">Proyek</span>
+                </h2>
+              </div>
             </div>
-          </div>
 
-          {/* Deskripsi */}
-          <p className="text-[#44474e] dark:text-[#d3e4fe]/70 text-base max-w-2xl mx-auto mt-4">
-            Melihat karya inovatif yang lahir dari tangan kreatif para mahasiswa Informatika International Women University.
-          </p>
-        </div>
+            {/* Deskripsi */}
+            <p className="text-[#44474e] dark:text-[#d3e4fe]/70 text-base max-w-2xl mx-auto mt-4">
+              Melihat karya inovatif yang lahir dari tangan kreatif para mahasiswa Informatika International Women University.
+            </p>
+          </div>
+        </Reveal>
       </div>
 
       {/* Kontainer Slider Kereta Api (Marquee) */}
-      <div className="w-full overflow-hidden relative py-4">
+      <Reveal delay={150} className="w-full overflow-hidden relative py-4">
         {/* Parent wrapper yang bergerak sebagai satu kesatuan kereta api */}
         <div className="flex w-max animate-marquee hover:[animation-play-state:paused] cursor-grab active:cursor-grabbing">
           
@@ -119,7 +122,7 @@ export default function Projects() {
             ))}
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }
