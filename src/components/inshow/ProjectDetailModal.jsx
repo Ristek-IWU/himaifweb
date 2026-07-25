@@ -20,13 +20,21 @@ export default function ProjectDetailModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Image Header */}
-        <div className="relative h-48 bg-slate-100 dark:bg-slate-900 border-b border-[#c5c6cf]/40 dark:border-[#1e3a5f]/30 flex-shrink-0">
-          <img 
-            src={project.image} 
-            alt={project.title} 
-            className="w-full h-full object-cover opacity-90 dark:opacity-75"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-[#071329] dark:via-transparent dark:to-transparent"></div>
+        <div className="relative h-48 bg-slate-100 dark:bg-slate-900 border-b border-[#c5c6cf]/40 dark:border-[#1e3a5f]/30 flex-shrink-0 flex items-center justify-center">
+          {project.image ? (
+            <>
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                className="w-full h-full object-cover opacity-90 dark:opacity-75"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-[#071329] dark:via-transparent dark:to-transparent"></div>
+            </>
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-400">
+              <span className="material-symbols-outlined text-5xl">folder_code</span>
+            </div>
+          )}
           
           {/* Close Button */}
           <button 

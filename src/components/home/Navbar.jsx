@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import logoHima from '../../assets/logo_hima.png'
 import iwuLogo from '../../assets/iwu.png'
+import { useLanguage } from '../../context/LanguageContext'
 
 export default function Navbar({ active, setActive }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
-  const [lang, setLang] = useState('ID')
+  const { lang, setLang, t } = useLanguage()
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false)
   const [isMobileLangDropdownOpen, setIsMobileLangDropdownOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -49,11 +50,11 @@ export default function Navbar({ active, setActive }) {
   }, [])
 
   const links = [
-    { id: 'home', label: 'Home', href: '#' },
-    { id: 'tentang', label: 'About Us', href: '#tentang' },
-    { id: 'structure', label: 'Structure', href: '#structure' },
-    { id: 'projects', label: 'Projects', href: '#projects' },
-    { id: 'contact', label: 'Contact', href: '#contact' },
+    { id: 'home', label: t('navbar.home'), href: '#' },
+    { id: 'tentang', label: t('navbar.about'), href: '#tentang' },
+    { id: 'structure', label: t('navbar.structure'), href: '#structure' },
+    { id: 'projects', label: t('navbar.projects'), href: '#projects' },
+    { id: 'contact', label: t('navbar.contact'), href: '#contact' },
   ]
 
   const languages = [
@@ -107,7 +108,7 @@ export default function Navbar({ active, setActive }) {
           <div className="flex items-center gap-4">
             {/* CTA Button (hidden on mobile) */}
             <button className="hidden md:block bg-[#d8e2ff] dark:bg-gradient-to-r dark:from-[#005bc1] dark:to-[#38bdf8] text-[#001d35] dark:text-white px-6 py-2 rounded-lg text-sm font-serif font-bold hover:bg-[#adc6ff] dark:hover:from-[#1d6fd1] dark:hover:to-[#4ea4f5] hover:shadow-md active:scale-95 transition-all duration-200 cursor-pointer">
-              Join Now
+              {t('navbar.join')}
             </button>
 
             {/* Mobile Menu Toggle Button */}
@@ -146,7 +147,7 @@ export default function Navbar({ active, setActive }) {
           ))}
           
           <button className="w-full bg-[#d8e2ff] dark:bg-gradient-to-r dark:from-[#005bc1] dark:to-[#38bdf8] text-[#001d35] dark:text-white py-2.5 rounded-lg text-sm font-serif font-bold hover:bg-[#adc6ff] dark:hover:from-[#1d6fd1] dark:hover:to-[#4ea4f5] hover:shadow-md transition-all duration-200">
-            Join Now
+            {t('navbar.join')}
           </button>
 
           {/* Utilities row for mobile */}
@@ -203,9 +204,9 @@ export default function Navbar({ active, setActive }) {
 
             {/* Left: Blue-themed micro-spaced text */}
             <div className="flex items-center gap-4 text-[10px] font-serif font-bold tracking-widest text-[#005bc1] dark:text-[#38bdf8] uppercase select-none transition-colors">
-              <span>Bandung, ID</span>
+              <span>{t('navbar.bandungID')}</span>
               <span className="text-[#005bc1]/40 dark:text-[#38bdf8]/40 font-normal">•</span>
-              <span className="hover:text-[#00428c] dark:hover:text-[#58c7f9] transition-colors cursor-pointer">info@himaifsynapse.org</span>
+              <span className="hover:text-[#00428c] dark:hover:text-[#58c7f9] transition-colors cursor-pointer">{t('navbar.infoEmail')}</span>
             </div>
 
             {/* Right: Borderless utility icons */}

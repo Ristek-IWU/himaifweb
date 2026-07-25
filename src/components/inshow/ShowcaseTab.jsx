@@ -97,13 +97,19 @@ export default function ShowcaseTab({
               className="group bg-white dark:bg-[#071329]/60 border border-[#c5c6cf]/65 dark:border-[#1e3a5f]/30 hover:border-[#005bc1]/50 dark:hover:border-[#60a5fa]/50 rounded-2xl overflow-hidden shadow-md dark:shadow-lg transition-all duration-300 hover:scale-[1.01] hover:shadow-xl flex flex-col justify-between cursor-pointer"
             >
               {/* Image Thumbnail */}
-              <div className="relative h-44 overflow-hidden bg-slate-100 dark:bg-slate-900 border-b border-[#c5c6cf]/40 dark:border-[#1e3a5f]/20">
-                <img 
-                  src={proj.image} 
-                  alt={proj.title} 
-                  className="w-full h-full object-cover opacity-90 dark:opacity-80 group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 left-3 flex flex-wrap gap-1 max-w-[85%]">
+              <div className="relative h-44 overflow-hidden bg-slate-100 dark:bg-slate-900 border-b border-[#c5c6cf]/40 dark:border-[#1e3a5f]/20 flex items-center justify-center">
+                {proj.image ? (
+                  <img 
+                    src={proj.image} 
+                    alt={proj.title} 
+                    className="w-full h-full object-cover opacity-90 dark:opacity-80 group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-400">
+                    <span className="material-symbols-outlined text-4xl">folder_code</span>
+                  </div>
+                )}
+                <div className="absolute top-3 left-3 flex flex-wrap gap-1 max-w-[85%] z-10">
                   <span className="bg-[#031636]/90 dark:bg-[#031636]/95 backdrop-blur-sm border border-[#60a5fa]/30 px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider text-[#60a5fa]">
                     {proj.tags.platform}
                   </span>

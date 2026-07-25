@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLanguage } from '../../context/LanguageContext'
 
 // Reusable social media SVG icons
 const SocialIcons = {
@@ -26,24 +27,35 @@ const socialLinks = [
 ]
 
 export default function SecretariesTreasurers() {
+  const { t } = useLanguage()
+
+  // Load profiles from localStorage
+  const savedProfiles = typeof window !== 'undefined' ? localStorage.getItem('admin_hima_profiles') : null
+  const profiles = savedProfiles ? JSON.parse(savedProfiles) : null
+
+  const filterImage = (url) => {
+    if (!url || url.includes('unsplash.com')) return ''
+    return url
+  }
+
   const bphStaff = [
     {
-      name: 'Sarah N',
-      role: 'Bendahara 1',
+      name: profiles?.treasurer1?.name || 'Sarah N',
+      role: t('struktur.treasurer1'),
       icon: 'account_balance',
-      image: ''
+      image: filterImage(profiles?.treasurer1?.image)
     },
     {
-      name: 'Nazril A',
-      role: 'Bendahara Umum',
+      name: profiles?.treasurerGen?.name || 'Nazril A',
+      role: t('struktur.treasurerGeneral'),
       icon: 'account_balance_wallet',
-      image: ''
+      image: filterImage(profiles?.treasurerGen?.image)
     },
     {
-      name: 'Audia',
-      role: 'Sekretaris',
+      name: profiles?.secretary?.name || 'Audia',
+      role: t('struktur.secretary'),
       icon: 'edit_note',
-      image: ''
+      image: filterImage(profiles?.secretary?.image)
     }
   ]
 

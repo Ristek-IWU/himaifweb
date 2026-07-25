@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { categoryGroups, groupOrder, initialProjects, initialDriveFiles } from './constants'
+import { logActivity, ACTIVITY_TYPES } from '../../utils/activityLogger'
+import { trackPortalVisit, startSession, endSession } from '../../utils/analyticsTracker'
 import './animations.css'
 
 import LoadingSplash from './LoadingSplash'
@@ -84,7 +86,20 @@ export default function InShowPortal({ onOpenChange }) {
   // Sync open state and active tab to sessionStorage
   useEffect(() => {
     sessionStorage.setItem('himaif_portal_open', isOpen ? 'true' : 'false')
+    if (isOpen) {
+      trackPortalVisit()
+      startSession('inshow_portal')
+    } else {
+      endSession()
+    }
   }, [isOpen])
+
+  // End session on unmount
+  useEffect(() => {
+    return () => {
+      endSession()
+    }
+  }, [])
 
   useEffect(() => {
     sessionStorage.setItem('himaif_portal_tab', activeTab)
@@ -181,7 +196,15 @@ export default function InShowPortal({ onOpenChange }) {
   }
 
   // Showcase Projects Database with detailed tags
-  const [projects, setProjects] = useState(initialProjects)
+  const [projects, setProjects] = useState(() => {
+    const saved = localStorage.getItem('himaif_inshow_projects')
+    return saved ? JSON.parse(saved) : initialProjects
+  })
+
+  // Sync projects to localStorage on change
+  useEffect(() => {
+    localStorage.setItem('himaif_inshow_projects', JSON.stringify(projects))
+  }, [projects])
 
   // Drive Storage Files Database (Simulated)
   const [driveFiles, setDriveFiles] = useState(initialDriveFiles)
@@ -458,16 +481,22 @@ export default function InShowPortal({ onOpenChange }) {
   const handleLogin = (e) => {
     e.preventDefault()
     setIsLoggedIn(true)
+    logActivity(ACTIVITY_TYPES.LOGIN, loginEmail || 'User', '', 'Login ke InShow Portal')
   }
 
   const handleLoginDemo = () => {
     setIsLoggedIn(true)
+    logActivity(ACTIVITY_TYPES.LOGIN, 'Demo User', '', 'Login demo ke InShow Portal')
   }
 
   const handleUpvote = (id, e) => {
     e.stopPropagation()
+    const targetProj = projects.find(p => p.id === id)
     setProjects(projects.map(proj => {
       if (proj.id === id) {
+        if (!proj.hasUpvoted) {
+          logActivity(ACTIVITY_TYPES.UPVOTE, 'Ervan (Anda)', targetProj?.title || '', 'Upvote proyek')
+        }
         return {
           ...proj,
           upvotes: proj.hasUpvoted ? proj.upvotes - 1 : proj.upvotes + 1,
@@ -481,6 +510,8 @@ export default function InShowPortal({ onOpenChange }) {
   const handleAddComment = (e) => {
     e.preventDefault()
     if (!newComment.trim()) return
+
+    logActivity(ACTIVITY_TYPES.COMMENT, 'Ervan (Anda)', selectedProject?.title || '', newComment.substring(0, 80))
 
     setProjects(projects.map(proj => {
       if (proj.id === selectedProject.id) {
@@ -531,12 +562,13 @@ export default function InShowPortal({ onOpenChange }) {
       demoUrl: formDemo || "#",
       githubUrl: formGithub || "#",
       files: formFiles.split(',').map(f => f.trim()),
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
+      image: "",
       tags: mappedTags,
       comments: []
     }
 
     setProjects([newProj, ...projects])
+    logActivity(ACTIVITY_TYPES.UPLOAD, 'Ervan (Anda)', formTitle, `Proyek baru diupload ke InShow Showcase`)
 
     // Add corresponding zip archive file to Drive Files
     const newFile = {
@@ -581,7 +613,7 @@ export default function InShowPortal({ onOpenChange }) {
               demoUrl: "#",
               githubUrl: "#",
               files: [fileName],
-              image: "https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=600&q=80",
+              image: "",
               tags: {
                 platform: "Full Stack",
                 sector: "E-Commerce",

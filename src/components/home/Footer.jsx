@@ -1,20 +1,27 @@
 import React from 'react'
 import logoHima from '../../assets/logo_hima.png'
+import { useLanguage } from '../../context/LanguageContext'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const { t } = useLanguage()
+
+  // Load organization social links from CMS
+  const savedOrgSocials = typeof window !== 'undefined' ? localStorage.getItem('admin_org_socials') : null
+  const orgSocials = savedOrgSocials ? JSON.parse(savedOrgSocials) : {}
 
   const quickLinks = [
-    { label: 'Home', href: '#', icon: 'home' },
-    { label: 'About Us', href: '#about', icon: 'info' },
-    { label: 'Projects', href: '#projects', icon: 'folder' },
-    { label: 'Structure', href: '#vision', icon: 'account_tree' },
+    { label: t('navbar.home'), href: '#' },
+    { label: t('navbar.about'), href: '#about' },
+    { label: t('navbar.projects'), href: '#projects' },
+    { label: t('navbar.structure'), href: '#vision' },
   ]
 
+  // 4 social platforms always visible in the footer — CMS URL used if available
   const socialLinks = [
     {
       label: 'Instagram',
-      href: '#',
+      href: orgSocials.instagram || '#',
       brandColor: 'text-[#E4405F]',
       svg: (
         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -24,7 +31,7 @@ export default function Footer() {
     },
     {
       label: 'LinkedIn',
-      href: '#',
+      href: orgSocials.linkedin || '#',
       brandColor: 'text-[#0A66C2]',
       svg: (
         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -34,7 +41,7 @@ export default function Footer() {
     },
     {
       label: 'GitHub',
-      href: '#',
+      href: orgSocials.github || '#',
       brandColor: 'text-[#f0f6fc]',
       svg: (
         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -44,7 +51,7 @@ export default function Footer() {
     },
     {
       label: 'Twitter',
-      href: '#',
+      href: orgSocials.twitter || '#',
       brandColor: 'text-[#e7e9ea]',
       svg: (
         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -68,7 +75,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-[#d3e4fe]/50 text-sm leading-relaxed max-w-md">
-              Membentuk sarjana informatika yang unggul, berintegritas, dan inovatif di panggung global.
+              {t('footer.desc')}
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-3">
@@ -87,17 +94,14 @@ export default function Footer() {
 
           {/* Kanan (40%): Quick Links 2x2 Grid */}
           <div className="md:col-span-5">
-            <h5 className="text-white text-xs font-bold uppercase tracking-widest mb-4">Quick Links</h5>
+            <h5 className="text-white text-xs font-bold uppercase tracking-widest mb-4">{t('footer.quickLinksTitle')}</h5>
             <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
               {quickLinks.map((link) => (
                 <a
                   key={link.label}
-                  className="text-[#d3e4fe]/50 text-sm hover:text-[#adc6ff] transition-colors duration-200 flex items-center gap-2 group"
+                  className="text-[#d3e4fe]/50 text-sm hover:text-[#adc6ff] transition-colors duration-200"
                   href={link.href}
                 >
-                  <span className="material-symbols-outlined text-[10px] text-[#005bc1] group-hover:text-[#adc6ff] transition-colors duration-200">
-                    {link.icon}
-                  </span>
                   {link.label}
                 </a>
               ))}
@@ -109,12 +113,12 @@ export default function Footer() {
         {/* Copyright with border-top separator */}
         <div className="mt-8 pt-5 border-t border-[#005bc1]/20 flex flex-col md:flex-row items-center justify-between gap-2">
           <p className="text-[#d3e4fe]/30 text-xs">
-            © {currentYear} Divisi Riset & Inovasi. All rights reserved.
+            © {currentYear} {t('footer.copyright')}
           </p>
           <div className="flex items-center gap-3 text-[#d3e4fe]/25 text-xs">
-            <a href="#" className="hover:text-[#adc6ff] transition-colors duration-200">Privacy Policy</a>
+            <a href="#" className="hover:text-[#adc6ff] transition-colors duration-200">{t('footer.privacyPolicy')}</a>
             <span className="text-[#d3e4fe]/10">·</span>
-            <a href="#" className="hover:text-[#adc6ff] transition-colors duration-200">Terms of Service</a>
+            <a href="#" className="hover:text-[#adc6ff] transition-colors duration-200">{t('footer.termsOfService')}</a>
           </div>
         </div>
       </div>

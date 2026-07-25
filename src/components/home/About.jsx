@@ -5,35 +5,59 @@ import solidityLogo from '../../assets/light-solidity-svgrepo-com.svg'
 import pythonLogo from '../../assets/python-svgrepo-com.svg'
 import goLogo from '../../assets/go-svgrepo-com.svg'
 import javaLogo from '../../assets/java-svgrepo-com.svg'
-import upgradingImg from '../../assets/upgrading.jpg'
-import upgrading2Img from '../../assets/upgrading (2).jpg'
-import upgrading3Img from '../../assets/upgrading (3).jpg'
+import { useLanguage } from '../../context/LanguageContext'
+
+import { translations } from '../../locales/translations'
 
 export default function About() {
+  const { t } = useLanguage()
+
+  // Load customized about images from localStorage
+  const savedAboutImages = typeof window !== 'undefined' ? localStorage.getItem('admin_about_images') : null
+  const aboutImages = savedAboutImages ? JSON.parse(savedAboutImages) : {
+    img1: '',
+    img2: '',
+    img3: ''
+  }
+
+  // Load customized core values from localStorage
+  const savedCoreValues = typeof window !== 'undefined' ? localStorage.getItem('admin_core_values') : null
+  const parsedCoreValues = savedCoreValues ? JSON.parse(savedCoreValues) : null
+
+  const getCoreValue = (index, key) => {
+    if (!parsedCoreValues) return t(key);
+    const value = parsedCoreValues[index];
+    const indonesianDefault = translations.ID.about.coreValues[key.split('.').pop()];
+    if (value === indonesianDefault) {
+      return t(key);
+    }
+    return value || t(key);
+  }
+
   const categories = [
     {
-      title: 'Inovatif',
+      title: getCoreValue(0, 'about.coreValues.innovative'),
       icon: solidityLogo,
       tagBg: 'bg-[#031636]',
       textColor: 'text-[#031636]',
       foldBorder: 'border-t-[#010a1b]',
     },
     {
-      title: 'Kreatif',
+      title: getCoreValue(1, 'about.coreValues.creative'),
       icon: pythonLogo,
       tagBg: 'bg-[#005bc1]',
       textColor: 'text-[#005bc1]',
       foldBorder: 'border-t-[#003d80]',
     },
     {
-      title: 'Progresif',
+      title: getCoreValue(2, 'about.coreValues.progressive'),
       icon: goLogo,
       tagBg: 'bg-[#0091ae]',
       textColor: 'text-[#0091ae]',
       foldBorder: 'border-t-[#006377]',
     },
     {
-      title: 'Inklusif',
+      title: getCoreValue(3, 'about.coreValues.inclusive'),
       icon: javaLogo,
       tagBg: 'bg-[#4e5e82]',
       textColor: 'text-[#4e5e82]',
@@ -75,11 +99,11 @@ export default function About() {
           <div className="text-center mb-8">
             <div className="relative inline-block">
               <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-5xl sm:text-6xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight">
-                About
+                {t('about.watermark')}
               </span>
               <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-3">
                 <h2 className="text-[#031636] dark:text-white text-2xl sm:text-3xl font-serif font-extrabold tracking-tight">
-                  Tentang & <span className="text-[#005bc1] dark:text-[#60a5fa]">Nilai Inti</span>
+                  {t('about.title1')}<span className="text-[#005bc1] dark:text-[#60a5fa]">{t('about.titleHighlight')}</span>
                 </h2>
               </div>
             </div>
@@ -94,35 +118,62 @@ export default function About() {
             <div className="absolute -inset-3 border border-dashed border-secondary/20 dark:border-[#60a5fa]/15 rounded-3xl pointer-events-none -z-10 transform translate-y-2"></div>
             
             {/* Foto 1: Utama (Atas - Lebar/Landscape) */}
-            <div className="w-full aspect-[16/7] relative rounded-2xl overflow-hidden border border-[#e5e7eb] dark:border-[#1e3a5f]/40 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] group cursor-pointer bg-primary">
-              <img
-                alt="Upgrading HIMAIF"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                src={upgradingImg}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#031636]/60 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300"></div>
+            <div className="w-full aspect-[16/7] relative rounded-2xl overflow-hidden border border-[#e5e7eb] dark:border-[#1e3a5f]/40 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] group cursor-pointer bg-[#dce5f5] dark:bg-[#0d1b33] flex items-center justify-center">
+              {aboutImages.img1 ? (
+                <>
+                  <img
+                    alt="Foto HIMAIF 1"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    src={aboutImages.img1}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#031636]/60 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </>
+              ) : (
+                <div className="flex flex-col items-center gap-1 text-[#44474e]/40 dark:text-[#d3e4fe]/30">
+                  <span className="material-symbols-outlined text-3xl">add_photo_alternate</span>
+                  <span className="text-[10px] font-bold">Foto HIMAIF 1</span>
+                </div>
+              )}
             </div>
 
             {/* Baris Bawah: 2 Foto Berdampingan & Miring */}
             <div className="flex flex-col sm:flex-row gap-4 mt-1">
               {/* Foto 2: Bawah Kiri (Miring Kiri) */}
-              <div className="flex-1 aspect-[4/3] relative rounded-2xl overflow-hidden border border-[#e5e7eb] dark:border-[#1e3a5f]/40 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] group cursor-pointer bg-primary sm:-rotate-2.5 hover:rotate-0 hover:scale-105 hover:z-20 transition-all duration-500 ease-out">
-                <img
-                  alt="Upgrading HIMAIF 2"
-                  className="w-full h-full object-cover"
-                  src={upgrading2Img}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#031636]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="flex-1 aspect-[4/3] relative rounded-2xl overflow-hidden border border-[#e5e7eb] dark:border-[#1e3a5f]/40 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] group cursor-pointer bg-[#dce5f5] dark:bg-[#0d1b33] sm:-rotate-2.5 hover:rotate-0 hover:scale-105 hover:z-20 transition-all duration-500 ease-out flex items-center justify-center">
+                {aboutImages.img2 ? (
+                  <>
+                    <img
+                      alt="Foto HIMAIF 2"
+                      className="w-full h-full object-cover"
+                      src={aboutImages.img2}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#031636]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </>
+                ) : (
+                  <div className="flex flex-col items-center gap-1 text-[#44474e]/40 dark:text-[#d3e4fe]/30">
+                    <span className="material-symbols-outlined text-2xl">add_photo_alternate</span>
+                    <span className="text-[9px] font-bold">Foto HIMAIF 2</span>
+                  </div>
+                )}
               </div>
               
               {/* Foto 3: Bawah Kanan (Miring Kanan) */}
-              <div className="flex-1 aspect-[4/3] relative rounded-2xl overflow-hidden border border-[#e5e7eb] dark:border-[#1e3a5f]/40 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] group cursor-pointer bg-primary sm:rotate-2.5 hover:rotate-0 hover:scale-105 hover:z-20 transition-all duration-500 ease-out">
-                <img
-                  alt="Upgrading HIMAIF 3"
-                  className="w-full h-full object-cover"
-                  src={upgrading3Img}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#031636]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="flex-1 aspect-[4/3] relative rounded-2xl overflow-hidden border border-[#e5e7eb] dark:border-[#1e3a5f]/40 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] group cursor-pointer bg-[#dce5f5] dark:bg-[#0d1b33] sm:rotate-2.5 hover:rotate-0 hover:scale-105 hover:z-20 transition-all duration-500 ease-out flex items-center justify-center">
+                {aboutImages.img3 ? (
+                  <>
+                    <img
+                      alt="Foto HIMAIF 3"
+                      className="w-full h-full object-cover"
+                      src={aboutImages.img3}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#031636]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </>
+                ) : (
+                  <div className="flex flex-col items-center gap-1 text-[#44474e]/40 dark:text-[#d3e4fe]/30">
+                    <span className="material-symbols-outlined text-2xl">add_photo_alternate</span>
+                    <span className="text-[9px] font-bold">Foto HIMAIF 3</span>
+                  </div>
+                )}
               </div>
             </div>
           </Reveal>
@@ -144,11 +195,11 @@ export default function About() {
                 
                 <div>
                   <span className="inline-block text-[10px] font-extrabold text-secondary dark:text-[#60a5fa] uppercase tracking-widest mb-1">
-                    Pengenalan
+                    {t('about.introTag')}
                   </span>
-                  <h3 className="text-lg font-bold text-primary dark:text-[#d3e4fe] mb-2">HIMAIF IWU</h3>
-                  <p className="text-on-surface-variant dark:text-[#d3e4fe]/70 text-sm lg:text-base leading-relaxed">
-                    Kami adalah pusat akselerasi talenta digital masa depan, menjembatani dunia akademik dengan kebutuhan nyata industri teknologi modern.
+                  <h3 className="text-lg font-bold text-primary dark:text-[#d3e4fe] mb-2">{t('about.aboutHima')}</h3>
+                  <p className="text-[#44474e] dark:text-[#d3e4fe]/70 text-sm lg:text-base leading-relaxed">
+                    {t('about.introDesc')}
                   </p>
                 </div>
               </div>

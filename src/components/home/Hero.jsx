@@ -3,8 +3,11 @@ import logoHima from '../../assets/logo_hima.png'
 import risetinLogo from '../../assets/risetin.png'
 import orbisLogo from '../../assets/orbis.png'
 import solidityLogo from '../../assets/light-solidity-svgrepo-com.svg'
+import { useLanguage } from '../../context/LanguageContext'
 
 export default function Hero() {
+  const { t } = useLanguage()
+
   return (
     <section className="relative min-h-[580px] lg:min-h-[680px] flex items-center bg-[#f0f2f8] dark:bg-gradient-to-br dark:from-[#040d1a] dark:via-[#080f1e] dark:to-[#0a1628] overflow-hidden border-b border-[#c5c6cf] dark:border-[#1e3a5f]/30">
       {/* Background glow and subtle dot grid */}
@@ -39,36 +42,37 @@ export default function Hero() {
         <div className="lg:col-span-7 space-y-8 text-left">
           {/* Headline with Dashed Box Accent */}
           <h1 className="text-[#031636] dark:text-white text-4xl sm:text-5xl md:text-7xl font-serif font-normal tracking-tight flex flex-col gap-1 sm:gap-2">
-            <span>Himpunan</span>
+            <span>{t('hero.title1')}</span>
             <span className="relative inline-block my-4 sm:my-5 self-start">
               {/* Teks Watermark di Belakang */}
               <span 
                 className="absolute -top-5 sm:-top-8 text-2xl sm:text-4xl md:text-5xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight"
                 style={{ left: '15px', transform: 'none' }}
               >
-                Informatika IWU
+                {t('hero.subtitle')}
               </span>
               {/* Box Utama */}
               <span className="inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-4 sm:px-5 py-1 sm:py-1.5 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-2">
-                <span className="text-[#005bc1] dark:text-[#60a5fa] font-bold">Mahasiswa</span>
+                <span className="text-[#005bc1] dark:text-[#60a5fa] font-bold">{t('hero.badge')}</span>
               </span>
             </span>
-            <span>Informatika</span>
+            <span>{t('hero.title2')}</span>
           </h1>
 
           {/* Description Text */}
           <p className="text-[#44474e] dark:text-[#d3e4fe]/60 text-base md:text-lg max-w-xl leading-relaxed opacity-95">
-            Wadah pengembangan potensi mahasiswa Informatika menuju{" "}
-            <span className="text-[#005bc1] dark:text-[#60a5fa] font-bold">profesional digital</span> yang kompetitif, inovatif, dan berdampak.
+            {t('hero.desc1')}
+            <span className="text-[#005bc1] dark:text-[#60a5fa] font-bold">{t('hero.descHighlight')}</span>
+            {t('hero.desc2')}
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-4 pt-2">
             <button className="bg-[#031636] dark:bg-gradient-to-r dark:from-[#005bc1] dark:to-[#38bdf8] text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-[#005bc1] dark:hover:from-[#1d6fd1] dark:hover:to-[#4ea4f5] hover:shadow-lg active:scale-95 transition-all duration-200 cursor-pointer">
-              Gabung Sekarang
+              {t('hero.ctaJoin')}
             </button>
             <button className="bg-transparent text-[#031636] dark:text-[#60a5fa] border border-[#c5c6cf] dark:border-[#60a5fa]/30 px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-white dark:hover:bg-[#0d1b33] hover:border-[#005bc1] dark:hover:border-[#60a5fa] active:scale-95 transition-all duration-200 flex items-center gap-2 cursor-pointer">
-              <span>Jelajahi Proyek</span>
+              <span>{t('hero.ctaExplore')}</span>
               <span className="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
           </div>
@@ -88,17 +92,17 @@ export default function Hero() {
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-stretch gap-4 bg-white dark:bg-[#0d1b33] border border-[#c5c6cf]/50 dark:border-[#60a5fa]/15 rounded-2xl py-2 px-4 shadow-[0_10px_25px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_25px_rgba(0,0,0,0.3)] backdrop-blur-md whitespace-nowrap">
               <div className="text-center min-w-[48px]">
                 <p className="text-[#005bc1] dark:text-[#60a5fa] text-lg font-black leading-none">150+</p>
-                <p className="text-[#44474e] dark:text-[#d3e4fe]/50 text-[8px] font-bold uppercase tracking-wider mt-1.5">Anggota</p>
+                <p className="text-[#44474e] dark:text-[#d3e4fe]/50 text-[8px] font-bold uppercase tracking-wider mt-1.5">{t('hero.statsMembers')}</p>
               </div>
               <div className="w-[1px] bg-[#c5c6cf]/80 dark:bg-[#1e3a5f]/60"></div>
               <div className="text-center min-w-[48px]">
                 <p className="text-[#005bc1] dark:text-[#60a5fa] text-lg font-black leading-none">20+</p>
-                <p className="text-[#44474e] dark:text-[#d3e4fe]/50 text-[8px] font-bold uppercase tracking-wider mt-1.5">Proyek</p>
+                <p className="text-[#44474e] dark:text-[#d3e4fe]/50 text-[8px] font-bold uppercase tracking-wider mt-1.5">{t('hero.statsProjects')}</p>
               </div>
               <div className="w-[1px] bg-[#c5c6cf]/80 dark:bg-[#1e3a5f]/60"></div>
               <div className="text-center min-w-[48px]">
                 <p className="text-[#005bc1] dark:text-[#60a5fa] text-lg font-black leading-none">5+</p>
-                <p className="text-[#44474e] dark:text-[#d3e4fe]/50 text-[8px] font-bold uppercase tracking-wider mt-1.5">Divisi</p>
+                <p className="text-[#44474e] dark:text-[#d3e4fe]/50 text-[8px] font-bold uppercase tracking-wider mt-1.5">{t('hero.statsDivisions')}</p>
               </div>
             </div>
 

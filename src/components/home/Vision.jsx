@@ -1,10 +1,45 @@
 import React from 'react'
 import Reveal from '../Reveal'
+import { useLanguage } from '../../context/LanguageContext'
+
+import { translations } from '../../locales/translations'
 
 export default function Vision() {
+  const { t } = useLanguage()
+
+  // Load vision data from localStorage
+  const savedVisionData = typeof window !== 'undefined' ? localStorage.getItem('admin_vision_data') : null
+  const visionData = savedVisionData ? JSON.parse(savedVisionData) : null
+
+  const getVisionDesc = () => {
+    if (!visionData?.vision) return t('vision.visionDesc');
+    if (visionData.vision === translations.ID.vision.visionDesc) {
+      return t('vision.visionDesc');
+    }
+    return visionData.vision;
+  }
+
+  const getMissionTitle = (index) => {
+    const key = `vision.missions.${index}.title`;
+    if (!visionData?.missions?.[index]?.title) return t(key);
+    if (visionData.missions[index].title === translations.ID.vision.missions[index].title) {
+      return t(key);
+    }
+    return visionData.missions[index].title;
+  }
+
+  const getMissionDesc = (index) => {
+    const key = `vision.missions.${index}.desc`;
+    if (!visionData?.missions?.[index]?.desc) return t(key);
+    if (visionData.missions[index].desc === translations.ID.vision.missions[index].desc) {
+      return t(key);
+    }
+    return visionData.missions[index].desc;
+  }
+
   const visionCard = {
-    title: 'VISI HIMAIF',
-    desc: 'Menjadi organisasi mahasiswa yang progresif, inklusif, dan unggul dalam pengembangan kompetensi teknologi informasi berbasis pemberdayaan perempuan di tingkat internasional.',
+    title: t('vision.visionTitle'),
+    desc: getVisionDesc(),
     icon: 'stars',
     tagBg: 'bg-[#031636]',
     foldBorder: 'border-t-[#010a1b]',
@@ -15,8 +50,8 @@ export default function Vision() {
   const missions = [
     {
       num: '01',
-      title: 'Akademik',
-      desc: 'Menyelenggarakan program pelatihan intensif untuk mengasah skill teknis di bidang AI, Data Science, dan Software Dev.',
+      title: getMissionTitle(0),
+      desc: getMissionDesc(0),
       icon: 'school',
       tagBg: 'bg-[#005bc1]',
       foldBorder: 'border-t-[#003d80]',
@@ -24,8 +59,8 @@ export default function Vision() {
     },
     {
       num: '02',
-      title: 'Kolaborasi',
-      desc: 'Membangun jejaring dengan industri dan komunitas teknologi global untuk peluang karir anggota.',
+      title: getMissionTitle(1),
+      desc: getMissionDesc(1),
       icon: 'groups',
       tagBg: 'bg-[#031636]',
       foldBorder: 'border-t-[#010a1b]',
@@ -33,8 +68,8 @@ export default function Vision() {
     },
     {
       num: '03',
-      title: 'Inovasi',
-      desc: 'Mendorong penciptaan solusi digital kreatif yang mampu menjawab tantangan industri 4.0.',
+      title: getMissionTitle(2),
+      desc: getMissionDesc(2),
       icon: 'lightbulb',
       tagBg: 'bg-[#4e5e82]',
       foldBorder: 'border-t-[#35415c]',
@@ -42,8 +77,8 @@ export default function Vision() {
     },
     {
       num: '04',
-      title: 'Inklusivitas',
-      desc: 'Memperkuat peran perempuan dalam ekosistem teknologi melalui lingkungan belajar yang mendukung.',
+      title: getMissionTitle(3),
+      desc: getMissionDesc(3),
       icon: 'diversity_3',
       tagBg: 'bg-[#0091ae]',
       foldBorder: 'border-t-[#006377]',
@@ -60,11 +95,11 @@ export default function Vision() {
           <div className="text-center">
             <div className="relative inline-block">
               <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-5xl sm:text-6xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight">
-                V&M
+                {t('vision.watermark')}
               </span>
               <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-3">
                 <h2 className="text-[#031636] dark:text-white text-2xl sm:text-3xl font-serif font-extrabold tracking-tight">
-                  Visi & <span className="text-[#005bc1] dark:text-[#60a5fa]">Misi</span>
+                  {t('vision.title1')}<span className="text-[#005bc1] dark:text-[#60a5fa]">{t('vision.titleHighlight')}</span>
                 </h2>
               </div>
             </div>
@@ -78,7 +113,7 @@ export default function Vision() {
         <div className="space-y-6">
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-[#031636] dark:bg-[#60a5fa]"></span>
-            <h3 className="text-[#031636] dark:text-[#60a5fa] text-xs font-bold uppercase tracking-widest">Visi Kami</h3>
+            <h3 className="text-[#031636] dark:text-[#60a5fa] text-xs font-bold uppercase tracking-widest">{t('vision.ourVision')}</h3>
           </div>
           
           <Reveal>
@@ -114,13 +149,13 @@ export default function Vision() {
         <div className="space-y-6">
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-[#005bc1] dark:bg-[#60a5fa]"></span>
-            <h3 className="text-[#005bc1] dark:text-[#60a5fa] text-xs font-bold uppercase tracking-widest">Misi Kami</h3>
+            <h3 className="text-[#005bc1] dark:text-[#60a5fa] text-xs font-bold uppercase tracking-widest">{t('vision.ourMission')}</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
             {missions.map((card, idx) => (
               <Reveal
-                key={card.title}
+                key={idx}
                 delay={idx * 80}
               >
                 <div

@@ -1,12 +1,13 @@
 import Reveal from '../Reveal'
-import { heroData } from './data/data'
+import { useLanguage } from '../../context/LanguageContext'
 
 /**
  * Section 1 — Hero halaman Tentang Kami.
  * Background gelap (primary), teks + card sejarah dengan ribbon.
  */
 export default function Hero() {
-  const { title, description } = heroData
+  const { t } = useLanguage()
+  const paragraphs = t('tentang.sejarahParagraphs')
 
   return (
     <section className="relative bg-[#f0f2f8] dark:bg-gradient-to-br dark:from-[#040d1a] dark:via-[#080f1e] dark:to-[#0a1628] text-[#031636] dark:text-white overflow-hidden">
@@ -40,12 +41,12 @@ export default function Hero() {
           <div className="relative inline-block mb-8">
             {/* Watermark */}
             <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-2xl sm:text-5xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight">
-              Sejarah
+              {t('tentang.sejarahWatermark')}
             </span>
             {/* Box — dengan border dashed */}
             <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-2">
               <h1 className="text-[#031636] dark:text-white text-2xl sm:text-3xl font-serif font-extrabold tracking-tight">
-                HIMAIf <span className="text-[#005bc1] dark:text-[#60a5fa]"> IWU</span>
+                {t('tentang.sejarahTitle')}
               </h1>
             </div>
           </div>
@@ -66,7 +67,7 @@ export default function Hero() {
                 className="text-[11px] font-extrabold text-white/80 uppercase tracking-[0.15em] whitespace-nowrap"
                 style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
               >
-                Sejarah Himpunan Mahasiswa Informatika
+                {t('tentang.sejarahRibbon')}
               </span>
               {/* 3D Fold */}
               <div className="absolute bottom-0 left-full w-0 h-0 border-t-[12px] border-t-[#003d80] dark:border-t-[#003d80] border-r-[12px] border-r-transparent"></div>
@@ -74,7 +75,7 @@ export default function Hero() {
 
             {/* Konten Sejarah — tanpa logo (pindah ke pita) */}
             <div className="space-y-5 md:space-y-6">
-              {description.map((text, i) => (
+              {Array.isArray(paragraphs) && paragraphs.map((text, i) => (
                 <p
                   key={i}
                   className="text-sm md:text-base leading-[1.8] text-[#44474e] dark:text-[#d3e4fe]/80 text-justify md:text-left"

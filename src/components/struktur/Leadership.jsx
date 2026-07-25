@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLanguage } from '../../context/LanguageContext'
 
 // Reusable social media SVG icons
 const SocialIcons = {
@@ -20,31 +21,42 @@ const SocialIcons = {
 }
 
 const socialLinks = [
-  { key: 'instagram', icon: SocialIcons.instagram, href: '#', textColor: 'text-[#e4405f]', bgColor: 'bg-[#e4405f]/10 dark:bg-[#e4405f]/15', borderColor: 'border-[#e4405f]/30', hoverBg: 'hover:bg-[#e4405f] hover:text-white' },
-  { key: 'linkedin', icon: SocialIcons.linkedin, href: '#', textColor: 'text-[#0a66c2]', bgColor: 'bg-[#0a66c2]/10 dark:bg-[#0a66c2]/15', borderColor: 'border-[#0a66c2]/30', hoverBg: 'hover:bg-[#0a66c2] hover:text-white' },
-  { key: 'github', icon: SocialIcons.github, href: '#', textColor: 'text-[#333] dark:text-[#e2e8f0]', bgColor: 'bg-[#333]/10 dark:bg-[#e2e8f0]/10', borderColor: 'border-[#333]/20 dark:border-[#e2e8f0]/20', hoverBg: 'hover:bg-[#333] dark:hover:bg-[#e2e8f0] hover:text-white dark:hover:text-[#333]' }
+  { key: 'instagram', icon: SocialIcons.instagram, textColor: 'text-[#e4405f]', bgColor: 'bg-[#e4405f]/10 dark:bg-[#e4405f]/15', borderColor: 'border-[#e4405f]/30', hoverBg: 'hover:bg-[#e4405f] hover:text-white' },
+  { key: 'linkedin', icon: SocialIcons.linkedin, textColor: 'text-[#0a66c2]', bgColor: 'bg-[#0a66c2]/10 dark:bg-[#0a66c2]/15', borderColor: 'border-[#0a66c2]/30', hoverBg: 'hover:bg-[#0a66c2] hover:text-white' },
+  { key: 'github', icon: SocialIcons.github, textColor: 'text-[#333] dark:text-[#e2e8f0]', bgColor: 'bg-[#333]/10 dark:bg-[#e2e8f0]/10', borderColor: 'border-[#333]/20 dark:border-[#e2e8f0]/20', hoverBg: 'hover:bg-[#333] dark:hover:bg-[#e2e8f0] hover:text-white dark:hover:text-[#333]' }
 ]
 
 export default function Leadership() {
+  const { t } = useLanguage()
+
+  // Load profiles from localStorage
+  const savedProfiles = typeof window !== 'undefined' ? localStorage.getItem('admin_hima_profiles') : null
+  const profiles = savedProfiles ? JSON.parse(savedProfiles) : null
+
+  const filterImage = (url) => {
+    if (!url || url.includes('unsplash.com')) return ''
+    return url
+  }
+
   const coreLeaders = [
     {
-      role: 'Ketua Himpunan',
-      name: 'Okta Ramdhan',
-      image: '',
+      role: t('struktur.chairman'),
+      name: profiles?.ketua?.name || 'Okta Ramdhan',
+      image: filterImage(profiles?.ketua?.image),
       icon: 'shield_person',
     },
     {
-      role: 'Wakil Ketua Himpunan',
-      name: 'Wandi H',
-      image: '',
+      role: t('struktur.viceChairman'),
+      name: profiles?.wakil?.name || 'Wandi H',
+      image: filterImage(profiles?.wakil?.image),
       icon: 'verified_user',
     }
   ]
 
   const secGen = {
-    role: 'Sekretaris Jenderal',
-    name: 'Sinsin M',
-    image: '',
+    role: t('struktur.secGen'),
+    name: profiles?.sekjen?.name || 'Sinsin M',
+    image: filterImage(profiles?.sekjen?.image),
     icon: 'assignment_ind',
   }
 
@@ -108,11 +120,11 @@ export default function Leadership() {
       <div className="text-center mb-16">
         <div className="relative inline-block">
           <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-5xl sm:text-6xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight uppercase">
-            BPH
+            {t('struktur.bphWatermark')}
           </span>
           <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-3">
             <h2 className="text-[#031636] dark:text-white text-xl sm:text-2xl font-serif font-extrabold tracking-tight">
-              Badan Pengurus <span className="text-[#005bc1] dark:text-[#60a5fa]">Harian</span>
+              {t('struktur.bphTitle1')}<span className="text-[#005bc1] dark:text-[#60a5fa]">{t('struktur.bphTitleHighlight')}</span>
             </h2>
           </div>
         </div>

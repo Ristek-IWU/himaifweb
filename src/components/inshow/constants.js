@@ -118,7 +118,7 @@ export const initialProjects = [
     demoUrl: "https://verichain.example.com",
     githubUrl: "https://github.com/himaif/verichain",
     files: ["contract.sol", "index.html", "app.js", "README.md"],
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=600&q=80",
+    image: "",
     tags: {
       platform: "Web3",
       sector: "EdTech",
@@ -140,7 +140,7 @@ export const initialProjects = [
     demoUrl: "https://jamsos.example.com",
     githubUrl: "https://github.com/himaif/jamsos-zkp",
     files: ["zkp_circuit.circom", "verify.py", "main.py"],
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80",
+    image: "",
     tags: {
       platform: "Keamanan (Security)",
       sector: "Pemerintahan",
@@ -162,7 +162,7 @@ export const initialProjects = [
     demoUrl: "https://bobotohpay.example.com",
     githubUrl: "https://github.com/himaif/bobotoh-pay",
     files: ["App.tsx", "package.json", "wallet_connector.ts"],
-    image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=80",
+    image: "",
     tags: {
       platform: "Mobile",
       sector: "Fintech & Finance",
@@ -182,7 +182,7 @@ export const initialProjects = [
     demoUrl: "https://mentorbot.example.com",
     githubUrl: "https://github.com/himaif/ai-chatbot",
     files: ["rag_model.py", "api.js", "chat.css"],
-    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80",
+    image: "",
     tags: {
       platform: "Kecerdasan Buatan (AI)",
       sector: "EdTech",
@@ -202,7 +202,7 @@ export const initialProjects = [
     demoUrl: "https://smartagri.example.com",
     githubUrl: "https://github.com/himaif/smart-agriculture",
     files: ["arduino_sketch.ino", "dashboard.html", "server.js"],
-    image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80",
+    image: "",
     tags: {
       platform: "IoT",
       sector: "Agritech",

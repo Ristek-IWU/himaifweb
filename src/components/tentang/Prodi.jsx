@@ -1,15 +1,120 @@
 import Reveal from '../Reveal'
-import { programStudiData } from './data/data'
+import { useLanguage } from '../../context/LanguageContext'
 import pythonSvg from '../../assets/python-svgrepo-com.svg'
 import jsSvg from '../../assets/js-svgrepo-com.svg'
 import javaSvg from '../../assets/java-svgrepo-com.svg'
+import { translations } from '../../locales/translations'
 
 /**
  * Section 3 — Program Studi Informatika IWU.
  * Menampilkan informasi program studi, domain keahlian, dan statistik.
  */
 export default function Prodi() {
-  const { title, description, domains, stats } = programStudiData
+  const { t } = useLanguage()
+
+  // Load prodi data from localStorage
+  const savedProdiData = typeof window !== 'undefined' ? localStorage.getItem('admin_prodi_data') : null
+  const prodiData = savedProdiData ? JSON.parse(savedProdiData) : null
+
+  const getProdiDesc = () => {
+    const val = prodiData?.desc;
+    if (!val) return t('tentang.prodiDesc');
+    const defaults = [
+      translations.ID.tentang.prodiDesc,
+      "Program Studi Informatika IWU membekali mahasiswa dengan keterampilan teknologi terdepan demi menjawab tantangan industri digital modern."
+    ];
+    if (defaults.includes(val)) {
+      return t('tentang.prodiDesc');
+    }
+    return val;
+  }
+
+  const getProdiDomainTitle = (index) => {
+    const key = `tentang.prodiDomain${index + 1}Title`;
+    const defaultValTranslation = translations.ID.tentang[`prodiDomain${index + 1}Title`];
+    const val = prodiData?.domains?.[index]?.title;
+    if (!val) return t(key);
+    const dashboardDefaults = [
+      "Software Engineering",
+      "Kecerdasan Buatan (AI)",
+      "Keamanan Siber"
+    ];
+    if (val === defaultValTranslation || dashboardDefaults.includes(val)) {
+      return t(key);
+    }
+    return val;
+  }
+
+  const getProdiDomainDesc = (index) => {
+    const key = `tentang.prodiDomain${index + 1}Desc`;
+    const defaultValTranslation = translations.ID.tentang[`prodiDomain${index + 1}Desc`];
+    const val = prodiData?.domains?.[index]?.description;
+    if (!val) return t(key);
+    const dashboardDefaults = [
+      "Rekayasa perangkat lunak modern untuk ekosistem web, mobile, dan cloud.",
+      "Implementasi Machine Learning, Deep Learning, dan analisis data cerdas.",
+      "Proteksi sistem digital, audit keamanan kode, dan manajemen risiko siber."
+    ];
+    if (val === defaultValTranslation || dashboardDefaults.includes(val)) {
+      return t(key);
+    }
+    return val;
+  }
+
+  const getProdiStatValue = (index) => {
+    const key = `tentang.prodiStat${index + 1}Value`;
+    const defaultValTranslation = translations.ID.tentang[`prodiStat${index + 1}Value`];
+    const val = prodiData?.stats?.[index]?.value;
+    if (!val) return t(key);
+    const dashboardDefaults = ["98%", "20+"];
+    if (val === defaultValTranslation || dashboardDefaults.includes(val)) {
+      return t(key);
+    }
+    return val;
+  }
+
+  const getProdiStatLabel = (index) => {
+    const key = `tentang.prodiStat${index + 1}Label`;
+    const defaultValTranslation = translations.ID.tentang[`prodiStat${index + 1}Label`];
+    const val = prodiData?.stats?.[index]?.label;
+    if (!val) return t(key);
+    const dashboardDefaults = ["Tingkat Keterserapan Kerja", "Kerjasama Perusahaan IT"];
+    if (val === defaultValTranslation || dashboardDefaults.includes(val)) {
+      return t(key);
+    }
+    return val;
+  }
+
+  const prodiDesc = getProdiDesc()
+
+  const domains = [
+    { 
+      icon: 'code', 
+      title: getProdiDomainTitle(0), 
+      description: getProdiDomainDesc(0) 
+    },
+    { 
+      icon: 'psychology', 
+      title: getProdiDomainTitle(1), 
+      description: getProdiDomainDesc(1) 
+    },
+    { 
+      icon: 'security', 
+      title: getProdiDomainTitle(2), 
+      description: getProdiDomainDesc(2) 
+    },
+  ]
+
+  const stats = [
+    { 
+      value: getProdiStatValue(0), 
+      label: getProdiStatLabel(0) 
+    },
+    { 
+      value: getProdiStatValue(1), 
+      label: getProdiStatLabel(1) 
+    },
+  ]
 
   const svgMap = [jsSvg, pythonSvg, javaSvg]
 
@@ -47,11 +152,11 @@ export default function Prodi() {
           <div className="text-center mb-12 md:mb-16">
             <div className="relative inline-block">
               <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-5xl sm:text-6xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight uppercase">
-                PROGRAM STUDI
+                {t('tentang.prodiWatermark')}
               </span>
               <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-2">
                 <h2 className="text-[#031636] dark:text-white text-xl sm:text-2xl font-serif font-extrabold tracking-tight">
-                  Informatika <span className="text-[#005bc1] dark:text-[#60a5fa]">IWU</span>
+                  {t('tentang.prodiTitle')}
                 </h2>
               </div>
             </div>
@@ -61,7 +166,7 @@ export default function Prodi() {
         {/* Description */}
         <Reveal delay={80}>
           <p className="text-center text-[#44474e] dark:text-[#d3e4fe]/70 text-base md:text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
-            {description}
+            {prodiDesc}
           </p>
         </Reveal>
 

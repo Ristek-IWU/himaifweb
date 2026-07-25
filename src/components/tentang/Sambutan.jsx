@@ -1,13 +1,80 @@
 import Reveal from '../Reveal'
 import Placeholder from './Placeholder'
-import { ketuaData } from './data/data'
+import { useLanguage } from '../../context/LanguageContext'
+import { translations } from '../../locales/translations'
 
 /**
  * Section 2 — Sambutan Kepala Program Studi.
  * Grid 12 kolom: foto (5) + sambutan (7).
  */
 export default function Sambutan() {
-  const { eyebrow, title, quote, description, name, role, image } = ketuaData
+  const { t } = useLanguage()
+
+  // Load profile from localStorage
+  const savedProfiles = typeof window !== 'undefined' ? localStorage.getItem('admin_hima_profiles') : null
+  const profiles = savedProfiles ? JSON.parse(savedProfiles) : null
+
+  const getKaprodiQuote = () => {
+    const val = profiles?.kaprodi?.quote;
+    if (!val) return t('tentang.sambutanQuote');
+    const defaults = [
+      translations.ID.tentang.sambutanQuote,
+      "Inovasi teknologi dimulai dari keberanian untuk mencoba hal baru dan berkolaborasi tanpa batas."
+    ];
+    if (defaults.includes(val)) {
+      return t('tentang.sambutanQuote');
+    }
+    return val;
+  }
+
+  const getKaprodiDesc = () => {
+    const val = profiles?.kaprodi?.desc;
+    if (!val) return t('tentang.sambutanDesc');
+    const defaults = [
+      translations.ID.tentang.sambutanDesc,
+      "Program Studi Informatika IWU membekali mahasiswa dengan keterampilan abad ke-21 melalui kurikulum praktis dan berstandard industri."
+    ];
+    if (defaults.includes(val)) {
+      return t('tentang.sambutanDesc');
+    }
+    return val;
+  }
+
+  const getKaprodiName = () => {
+    const val = profiles?.kaprodi?.name;
+    if (!val) return t('tentang.sambutanKaprodiName');
+    const defaults = [
+      translations.ID.tentang.sambutanKaprodiName,
+      "Dr. Ir. H. Ahmad Fauzi, M.T."
+    ];
+    if (defaults.includes(val)) {
+      return t('tentang.sambutanKaprodiName');
+    }
+    return val;
+  }
+
+  const getKaprodiRole = () => {
+    const val = profiles?.kaprodi?.role;
+    if (!val) return t('tentang.sambutanKaprodiRole');
+    const defaults = [
+      translations.ID.tentang.sambutanKaprodiRole,
+      "Kepala Program Studi Informatika"
+    ];
+    if (defaults.includes(val)) {
+      return t('tentang.sambutanKaprodiRole');
+    }
+    return val;
+  }
+
+  const eyebrow = t('tentang.sambutanEyebrow')
+  const title = t('tentang.sambutanTitle')
+  const quote = getKaprodiQuote()
+  const description = getKaprodiDesc()
+  const name = getKaprodiName()
+  const role = getKaprodiRole()
+  const ribbonText = t('tentang.sambutanRibbonText')
+  const rawImg = profiles?.kaprodi?.image || ''
+  const image = (rawImg && !rawImg.includes('unsplash.com')) ? rawImg : ''
 
   return (
     <section className="bg-[#e1e8f5] dark:bg-gradient-to-b dark:from-[#0a1628] dark:to-[#0f1729]">
@@ -22,7 +89,7 @@ export default function Sambutan() {
                   className="text-[9px] font-extrabold text-white/80 uppercase tracking-[0.2em] whitespace-nowrap"
                   style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
                 >
-                   Kepala Program Studi Informatika IWU
+                   {ribbonText}
                 </span>
                 {/* 3D Fold */}
                 <div className="absolute bottom-0 left-full w-0 h-0 border-t-[12px] border-t-[#003d80] dark:border-t-[#003d80] border-r-[12px] border-r-transparent"></div>

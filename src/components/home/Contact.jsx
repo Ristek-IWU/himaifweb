@@ -1,27 +1,30 @@
 import React from 'react'
 import Reveal from '../Reveal'
+import { useLanguage } from '../../context/LanguageContext'
 
 export default function Contact() {
+  const { t } = useLanguage()
+
   const handleSubmit = (e) => {
     e.preventDefault()
   }
 
   const contactInfo = [
     {
-      label: 'Email',
+      label: t('contact.labelEmail'),
       value: 'himaif@iwu.ac.id',
       icon: 'mail',
       borderColor: 'border-l-[#031636]',
     },
     {
-      label: 'Telepon',
+      label: t('contact.labelPhone'),
       value: '+62 812 3456 7890',
       icon: 'call',
       borderColor: 'border-l-[#005bc1]',
     },
     {
-      label: 'Alamat',
-      value: 'Jl. Prof. Dr. Satrio No. 1, Jakarta Selatan',
+      label: t('contact.labelAddress'),
+      value: t('contact.valueAddress'),
       icon: 'location_on',
       borderColor: 'border-l-[#0091ae]',
     },
@@ -61,16 +64,16 @@ export default function Contact() {
           <div className="text-center mb-12">
             <div className="relative inline-block">
               <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-5xl sm:text-6xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight">
-                Kontak
+                {t('contact.watermark')}
               </span>
               <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-2">
                 <h2 className="text-[#031636] dark:text-white text-2xl sm:text-3xl font-serif font-extrabold tracking-tight">
-                  Mari <span className="text-[#005bc1] dark:text-[#60a5fa]">Berdiskusi</span>
+                  {t('contact.title1')}<span className="text-[#005bc1] dark:text-[#60a5fa]">{t('contact.titleHighlight')}</span>
                 </h2>
               </div>
             </div>
             <p className="text-[#44474e] dark:text-[#d3e4fe]/70 text-base max-w-xl mx-auto mt-4">
-              Punya pertanyaan atau ingin bekerja sama dalam proyek teknologi? Kirimkan pesan Anda melalui formulir ini.
+              {t('contact.subtitle')}
             </p>
           </div>
         </Reveal>
@@ -96,15 +99,15 @@ export default function Contact() {
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-1.5">
-                      <label className="text-[#031636] dark:text-[#d3e4fe]/80 text-xs font-bold uppercase tracking-wider">Nama Lengkap</label>
+                      <label className="text-[#031636] dark:text-[#d3e4fe]/80 text-xs font-bold uppercase tracking-wider">{t('contact.formName')}</label>
                       <input
                         className="w-full px-4 py-3 bg-white/80 dark:bg-[#0d1b33]/60 border-l-[3px] border-l-[#031636] dark:border-l-[#60a5fa] border-y border-y-[#e5e7eb] dark:border-y-[#1e3a5f]/40 border-r border-r-[#e5e7eb] dark:border-r-[#1e3a5f]/40 rounded-r-xl focus:border-l-[#005bc1] focus:border-y-[#005bc1] focus:border-r-[#005bc1] focus:ring-2 focus:ring-[#005bc1]/10 outline-none transition-all duration-200 text-sm text-[#031636] dark:text-[#d3e4fe] placeholder:text-[#44474e]/30 dark:placeholder:text-[#d3e4fe]/20"
-                        placeholder="John Doe"
+                        placeholder={t('contact.formPlaceholderName')}
                         type="text"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[#031636] dark:text-[#d3e4fe]/80 text-xs font-bold uppercase tracking-wider">Email</label>
+                      <label className="text-[#031636] dark:text-[#d3e4fe]/80 text-xs font-bold uppercase tracking-wider">{t('contact.formEmail')}</label>
                       <input
                         className="w-full px-4 py-3 bg-white/80 dark:bg-[#0d1b33]/60 border-l-[3px] border-l-[#005bc1] dark:border-l-[#60a5fa] border-y border-y-[#e5e7eb] dark:border-y-[#1e3a5f]/40 border-r border-r-[#e5e7eb] dark:border-r-[#1e3a5f]/40 rounded-r-xl focus:border-l-[#005bc1] focus:border-y-[#005bc1] focus:border-r-[#005bc1] focus:ring-2 focus:ring-[#005bc1]/10 outline-none transition-all duration-200 text-sm text-[#031636] dark:text-[#d3e4fe] placeholder:text-[#44474e]/30 dark:placeholder:text-[#d3e4fe]/20"
                         placeholder="john@email.com"
@@ -113,10 +116,10 @@ export default function Contact() {
                     </div>
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-[#031636] dark:text-[#d3e4fe]/80 text-xs font-bold uppercase tracking-wider">Pesan Anda</label>
+                    <label className="text-[#031636] dark:text-[#d3e4fe]/80 text-xs font-bold uppercase tracking-wider">{t('contact.formMessage')}</label>
                     <textarea
                       className="w-full px-4 py-3 bg-white/80 dark:bg-[#0d1b33]/60 border-l-[3px] border-l-[#0091ae] dark:border-l-[#0091ae] border-y border-y-[#e5e7eb] dark:border-y-[#1e3a5f]/40 border-r border-r-[#e5e7eb] dark:border-r-[#1e3a5f]/40 rounded-r-xl focus:border-l-[#005bc1] focus:border-y-[#005bc1] focus:border-r-[#005bc1] focus:ring-2 focus:ring-[#005bc1]/10 outline-none transition-all duration-200 resize-none text-sm text-[#031636] dark:text-[#d3e4fe] placeholder:text-[#44474e]/30 dark:placeholder:text-[#d3e4fe]/20"
-                      placeholder="Apa yang ingin Anda bicarakan?"
+                      placeholder={t('contact.formPlaceholderMessage')}
                       rows="5"
                     ></textarea>
                   </div>
@@ -125,7 +128,7 @@ export default function Contact() {
                     className="text-white px-10 py-3.5 rounded-xl text-sm font-bold shadow-[0_4px_20px_rgba(3,22,54,0.25)] hover:shadow-[0_8px_32px_rgba(0,91,193,0.35)] hover:-translate-y-0.5 active:scale-95 active:shadow-[0_2px_8px_rgba(0,91,193,0.2)] transition-all duration-300 cursor-pointer flex items-center gap-2"
                     style={{ background: 'linear-gradient(135deg, #031636 0%, #005bc1 100%)' }}
                   >
-                    <span>Kirim Pesan</span>
+                    <span>{t('contact.formSubmit')}</span>
                     <span className="material-symbols-outlined text-sm">send</span>
                   </button>
                 </form>
@@ -160,14 +163,14 @@ export default function Contact() {
                   </div>
                   <div className="absolute inset-0 flex flex-col items-center justify-center z-10 gap-1.5">
                     <span className="material-symbols-outlined text-3xl text-[#031636] dark:text-[#60a5fa]" style={{fontVariationSettings: "'FILL' 1, 'wght' 600"}}>location_on</span>
-                    <p className="text-[#031636] dark:text-[#d3e4fe] text-sm font-bold">Kampus IWU</p>
+                    <p className="text-[#031636] dark:text-[#d3e4fe] text-sm font-bold">{t('contact.mapTitle')}</p>
                     <a
                       className="inline-block bg-white/90 dark:bg-[#0d1b33]/80 backdrop-blur-sm text-[#031636] dark:text-[#60a5fa] border border-[#e5e7eb]/60 dark:border-[#1e3a5f]/40 px-4 py-1.5 rounded-lg text-[10px] font-bold hover:border-[#005bc1] dark:hover:border-[#60a5fa] hover:text-[#005bc1] dark:hover:text-[#60a5fa] active:scale-95 transition-all duration-200"
                       href="https://maps.google.com"
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Buka Google Maps
+                      {t('contact.mapButton')}
                     </a>
                   </div>
                 </div>
