@@ -1,7 +1,7 @@
 import Reveal from '../Reveal'
 import Placeholder from './Placeholder'
 import { useLanguage } from '../../context/LanguageContext'
-import { translations } from '../../locales/translations'
+import kaprodiImg from '../../assets/kaprodi.png'
 
 /**
  * Section 2 — Sambutan Kepala Program Studi.
@@ -10,102 +10,67 @@ import { translations } from '../../locales/translations'
 export default function Sambutan() {
   const { t } = useLanguage()
 
-  // Load profile from localStorage
+  // Load profile image from localStorage if available
   const savedProfiles = typeof window !== 'undefined' ? localStorage.getItem('admin_hima_profiles') : null
   const profiles = savedProfiles ? JSON.parse(savedProfiles) : null
 
-  const getKaprodiQuote = () => {
-    const val = profiles?.kaprodi?.quote;
-    if (!val) return t('tentang.sambutanQuote');
-    const defaults = [
-      translations.ID.tentang.sambutanQuote,
-      "Inovasi teknologi dimulai dari keberanian untuk mencoba hal baru dan berkolaborasi tanpa batas."
-    ];
-    if (defaults.includes(val)) {
-      return t('tentang.sambutanQuote');
-    }
-    return val;
-  }
-
-  const getKaprodiDesc = () => {
-    const val = profiles?.kaprodi?.desc;
-    if (!val) return t('tentang.sambutanDesc');
-    const defaults = [
-      translations.ID.tentang.sambutanDesc,
-      "Program Studi Informatika IWU membekali mahasiswa dengan keterampilan abad ke-21 melalui kurikulum praktis dan berstandard industri."
-    ];
-    if (defaults.includes(val)) {
-      return t('tentang.sambutanDesc');
-    }
-    return val;
-  }
-
-  const getKaprodiName = () => {
-    const val = profiles?.kaprodi?.name;
-    if (!val) return t('tentang.sambutanKaprodiName');
-    const defaults = [
-      translations.ID.tentang.sambutanKaprodiName,
-      "Dr. Ir. H. Ahmad Fauzi, M.T."
-    ];
-    if (defaults.includes(val)) {
-      return t('tentang.sambutanKaprodiName');
-    }
-    return val;
-  }
-
-  const getKaprodiRole = () => {
-    const val = profiles?.kaprodi?.role;
-    if (!val) return t('tentang.sambutanKaprodiRole');
-    const defaults = [
-      translations.ID.tentang.sambutanKaprodiRole,
-      "Kepala Program Studi Informatika"
-    ];
-    if (defaults.includes(val)) {
-      return t('tentang.sambutanKaprodiRole');
-    }
-    return val;
-  }
-
   const eyebrow = t('tentang.sambutanEyebrow')
-  const title = t('tentang.sambutanTitle')
-  const quote = getKaprodiQuote()
-  const description = getKaprodiDesc()
-  const name = getKaprodiName()
-  const role = getKaprodiRole()
+  const quote = t('tentang.sambutanQuote')
+  const paragraphs = t('tentang.sambutanParagraphs')
+  const name = t('tentang.sambutanKaprodiName')
+  const role = t('tentang.sambutanKaprodiRole')
   const ribbonText = t('tentang.sambutanRibbonText')
-  const rawImg = profiles?.kaprodi?.image || ''
-  const image = (rawImg && !rawImg.includes('unsplash.com')) ? rawImg : ''
+  const rawImg = profiles?.kaprodi?.image
+  const image = (rawImg && !rawImg.includes('unsplash.com')) ? rawImg : kaprodiImg
 
   return (
-    <section className="bg-[#e1e8f5] dark:bg-gradient-to-b dark:from-[#0a1628] dark:to-[#0f1729]">
-      <div className="max-w-[1280px] mx-auto px-6 py-16 md:py-20">
-        <div className="grid md:grid-cols-12 gap-10 md:gap-12 items-center">
+    <section className="bg-[#e1e8f5] dark:bg-gradient-to-b dark:from-[#0a1628] dark:to-[#0f1729] py-10 sm:py-12">
+      <div className="max-w-[1120px] mx-auto px-6">
+        {/* Section Heading */}
+        <Reveal>
+          <div className="text-center mb-6 sm:mb-8">
+            <div className="relative inline-block">
+              <span className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 text-3xl sm:text-4xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight uppercase">
+                {t('tentang.sambutanWatermark') || 'SAMBUTAN'}
+              </span>
+              <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-lg sm:rounded-xl px-6 py-2 sm:px-7 sm:py-2.5 shadow-[0_4px_20px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-2">
+                <h2 className="text-lg sm:text-xl font-serif font-extrabold tracking-tight">
+                  <span className="text-[#005bc1] dark:text-[#60a5fa]">{t('tentang.sambutanHeader1') || 'Kepala '}</span>
+                  <span className="text-[#031636] dark:text-white">{t('tentang.sambutanHeader2') || 'Program '}</span>
+                  <span className="text-[#005bc1] dark:text-[#60a5fa]">{t('tentang.sambutanHeader3') || 'Studi'}</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <div className="grid md:grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-center">
           {/* Foto — dengan pita */}
-          <Reveal className="md:col-span-5">
-            <div className="group relative bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+          <Reveal className="md:col-span-5 flex justify-center md:justify-start">
+            <div className="group relative bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-xl sm:rounded-2xl shadow-sm dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] max-w-xs w-full">
               {/* Left 3D Ribbon */}
-              <div className="absolute left-2.5 sm:left-3 top-0 bottom-[-12px] w-9 sm:w-10 rounded-t-lg bg-[#005bc1] dark:bg-[#005bc1] flex flex-col items-center pt-5 z-10 shadow-md">
+              <div className="absolute left-2.5 sm:left-3 top-0 bottom-[-10px] w-8 sm:w-9 rounded-t-lg bg-[#005bc1] dark:bg-[#005bc1] flex flex-col items-center pt-4 z-10 shadow-sm">
                 <span
-                  className="text-[9px] font-extrabold text-white/80 uppercase tracking-[0.2em] whitespace-nowrap"
+                  className="text-[8px] sm:text-[9px] font-extrabold text-white/80 uppercase tracking-[0.2em] whitespace-nowrap"
                   style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
                 >
                    {ribbonText}
                 </span>
                 {/* 3D Fold */}
-                <div className="absolute bottom-0 left-full w-0 h-0 border-t-[12px] border-t-[#003d80] dark:border-t-[#003d80] border-r-[12px] border-r-transparent"></div>
+                <div className="absolute bottom-0 left-full w-0 h-0 border-t-[10px] border-t-[#003d80] dark:border-t-[#003d80] border-r-[10px] border-r-transparent"></div>
               </div>
               {/* Foto */}
-              <div className="pl-12 sm:pl-14 pr-3 py-3">
+              <div className="pl-11 sm:pl-12 pr-2.5 py-2.5">
                 {image ? (
                   <img
                     src={image}
                     alt={name}
-                    className="rounded-xl w-full aspect-[4/5] object-cover border-2 border-[#e5e7eb] dark:border-[#1e3a5f]/60"
+                    className="rounded-lg sm:rounded-xl w-full aspect-[4/5] object-cover border border-[#e5e7eb] dark:border-[#1e3a5f]/60"
                   />
                 ) : (
                   <Placeholder
                     label={`Foto ${name}`}
-                    className="aspect-[4/5] w-full border-2 border-[#e5e7eb] dark:border-[#1e3a5f]/60"
+                    className="aspect-[4/5] w-full rounded-lg sm:rounded-xl border border-[#e5e7eb] dark:border-[#1e3a5f]/60"
                   />
                 )}
               </div>
@@ -113,27 +78,33 @@ export default function Sambutan() {
           </Reveal>
 
           {/* Sambutan */}
-          <Reveal delay={120} className="md:col-span-7 space-y-6">
-            <div className="flex items-center gap-3 text-[#005bc1] dark:text-[#38bdf8] text-xs font-bold tracking-widest">
-              <span className="w-12 h-px bg-[#005bc1] dark:bg-[#38bdf8]" />
+          <Reveal delay={120} className="md:col-span-7 space-y-3.5 sm:space-y-4">
+            <div className="flex items-center gap-2.5 text-[#005bc1] dark:text-[#38bdf8] text-[10px] sm:text-xs font-bold tracking-widest">
+              <span className="w-10 h-px bg-[#005bc1] dark:bg-[#38bdf8]" />
               {eyebrow}
             </div>
 
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#031636] dark:text-white leading-tight">
-              {title}
-            </h2>
+            <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-[#031636] dark:text-white leading-snug">
+              {t('tentang.sambutanTitle1') || 'Kepemimpinan yang Menginspirasi & '}<span className="text-[#005bc1] dark:text-[#60a5fa]">{t('tentang.sambutanTitleHighlight') || 'Memberdayakan'}</span>
+            </h3>
 
-            <blockquote className="italic text-[#44474e] dark:text-[#d3e4fe]/80 text-lg leading-relaxed border-l-4 border-[#d8e2ff] dark:border-[#005bc1] pl-5">
-              {quote}
+            <div className="space-y-2.5 text-[#44474e] dark:text-[#d3e4fe]/80 leading-relaxed text-xs sm:text-sm">
+              {Array.isArray(paragraphs) ? (
+                paragraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))
+              ) : (
+                <p className="whitespace-pre-line">{t('tentang.sambutanDesc')}</p>
+              )}
+            </div>
+
+            <blockquote className="italic text-[#031636] dark:text-[#d3e4fe] font-medium text-xs sm:text-sm leading-relaxed border-l-4 border-[#005bc1] dark:border-[#38bdf8] pl-4 bg-white/50 dark:bg-[#005bc1]/10 py-2.5 rounded-r-lg shadow-xs">
+              "{quote}"
             </blockquote>
 
-            <p className="text-[#44474e] dark:text-[#d3e4fe]/70 leading-relaxed">
-              {description}
-            </p>
-
-            <div className="pt-2">
-              <p className="font-bold text-[#031636] dark:text-white">{name}</p>
-              <p className="text-sm font-semibold text-[#005bc1] dark:text-[#38bdf8]">{role}</p>
+            <div className="pt-1">
+              <p className="font-bold text-[#031636] dark:text-white text-xs sm:text-sm md:text-base leading-snug">{name}</p>
+              <p className="text-[11px] sm:text-xs font-semibold text-[#005bc1] dark:text-[#38bdf8] mt-0.5">{role}</p>
             </div>
           </Reveal>
         </div>

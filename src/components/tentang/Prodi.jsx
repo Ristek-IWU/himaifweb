@@ -3,27 +3,28 @@ import { useLanguage } from '../../context/LanguageContext'
 import pythonSvg from '../../assets/python-svgrepo-com.svg'
 import jsSvg from '../../assets/js-svgrepo-com.svg'
 import javaSvg from '../../assets/java-svgrepo-com.svg'
+
 import { translations } from '../../locales/translations'
 
 /**
- * Section 3 — Program Studi Informatika IWU.
- * Menampilkan informasi program studi, domain keahlian, dan statistik.
+ * Section 3 — Tentang Program Studi Informatika IWU.
+ * Domain keahlian + statistik.
  */
 export default function Prodi() {
   const { t } = useLanguage()
 
-  // Load prodi data from localStorage
-  const savedProdiData = typeof window !== 'undefined' ? localStorage.getItem('admin_prodi_data') : null
-  const prodiData = savedProdiData ? JSON.parse(savedProdiData) : null
+  // Load customized prodi content from localStorage
+  const savedProdi = typeof window !== 'undefined' ? localStorage.getItem('admin_prodi_data') : null
+  const prodiData = savedProdi ? JSON.parse(savedProdi) : null
 
   const getProdiDesc = () => {
-    const val = prodiData?.desc;
-    if (!val) return t('tentang.prodiDesc');
-    const defaults = [
-      translations.ID.tentang.prodiDesc,
-      "Program Studi Informatika IWU membekali mahasiswa dengan keterampilan teknologi terdepan demi menjawab tantangan industri digital modern."
+    if (!prodiData || !prodiData.description) return t('tentang.prodiDesc');
+    const defaultValTranslation = translations.ID.tentang.prodiDesc;
+    const val = prodiData.description;
+    const dashboardDefaults = [
+      "Program Studi Informatika di International Women University (IWU) berkomitmen menghasilkan lulusan berdaya saing global dengan keahlian komputasi modern, kecerdasan buatan, dan keamanan siber."
     ];
-    if (defaults.includes(val)) {
+    if (val === defaultValTranslation || dashboardDefaults.includes(val)) {
       return t('tentang.prodiDesc');
     }
     return val;
@@ -37,7 +38,7 @@ export default function Prodi() {
     const dashboardDefaults = [
       "Software Engineering",
       "Kecerdasan Buatan (AI)",
-      "Keamanan Siber"
+      "Blockchain"
     ];
     if (val === defaultValTranslation || dashboardDefaults.includes(val)) {
       return t(key);
@@ -53,7 +54,7 @@ export default function Prodi() {
     const dashboardDefaults = [
       "Rekayasa perangkat lunak modern untuk ekosistem web, mobile, dan cloud.",
       "Implementasi Machine Learning, Deep Learning, dan analisis data cerdas.",
-      "Proteksi sistem digital, audit keamanan kode, dan manajemen risiko siber."
+      "Pengembangan sistem terdesentralisasi, smart contract, dan teknologi Web3 modern."
     ];
     if (val === defaultValTranslation || dashboardDefaults.includes(val)) {
       return t(key);
@@ -99,7 +100,7 @@ export default function Prodi() {
       description: getProdiDomainDesc(1) 
     },
     { 
-      icon: 'security', 
+      icon: 'token', 
       title: getProdiDomainTitle(2), 
       description: getProdiDomainDesc(2) 
     },
@@ -119,7 +120,7 @@ export default function Prodi() {
   const svgMap = [jsSvg, pythonSvg, javaSvg]
 
   return (
-    <section className="relative bg-[#f0f2f8] dark:bg-gradient-to-br dark:from-[#040d1a] dark:via-[#080f1e] dark:to-[#0a1628] overflow-hidden">
+    <section className="relative bg-[#f0f2f8] dark:bg-gradient-to-br dark:from-[#040d1a] dark:via-[#080f1e] dark:to-[#0a1628] overflow-hidden py-10 sm:py-12">
       {/* Map coordinate grid — light */}
       <div
         className="absolute inset-0 pointer-events-none dark:hidden"
@@ -143,20 +144,20 @@ export default function Prodi() {
         }}
       />
       {/* Glow */}
-      <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#005bc1]/10 dark:bg-[#005bc1]/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-[#0091ae]/8 dark:bg-[#0091ae]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-32 -right-32 w-80 h-80 bg-[#005bc1]/10 dark:bg-[#005bc1]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -left-32 w-72 h-72 bg-[#0091ae]/8 dark:bg-[#0091ae]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 max-w-[1120px] mx-auto px-6 py-16 md:py-20">
+      <div className="relative z-10 max-w-[1120px] mx-auto px-6">
         {/* Title — watermark + dashed border box */}
         <Reveal>
-          <div className="text-center mb-12 md:mb-16">
+          <div className="text-center mb-6 sm:mb-8">
             <div className="relative inline-block">
-              <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-5xl sm:text-6xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight uppercase">
+              <span className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 text-3xl sm:text-4xl font-serif font-black text-[#031636]/[0.12] dark:text-[#60a5fa]/[0.06] whitespace-nowrap pointer-events-none select-none tracking-tight uppercase">
                 {t('tentang.prodiWatermark')}
               </span>
-              <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-xl px-8 py-3 shadow-[0_4px_24px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-2">
-                <h2 className="text-[#031636] dark:text-white text-xl sm:text-2xl font-serif font-extrabold tracking-tight">
-                  {t('tentang.prodiTitle')}
+              <div className="relative inline-flex items-center bg-white/80 dark:bg-[#0d1b33]/80 backdrop-blur-md rounded-lg sm:rounded-xl px-6 py-2 sm:px-7 sm:py-2.5 shadow-[0_4px_20px_rgba(0,91,193,0.12)] border-2 border-dashed border-[#005bc1]/40 dark:border-[#60a5fa]/30 transform -rotate-2">
+                <h2 className="text-[#031636] dark:text-white text-lg sm:text-xl font-serif font-extrabold tracking-tight">
+                  {t('tentang.prodiTitle1') || 'Informatika '}<span className="text-[#005bc1] dark:text-[#60a5fa]">{t('tentang.prodiTitleHighlight') || 'IWU'}</span>
                 </h2>
               </div>
             </div>
@@ -165,33 +166,33 @@ export default function Prodi() {
 
         {/* Description */}
         <Reveal delay={80}>
-          <p className="text-center text-[#44474e] dark:text-[#d3e4fe]/70 text-base md:text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p className="text-center text-[#44474e] dark:text-[#d3e4fe]/70 text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
             {prodiDesc}
           </p>
         </Reveal>
 
         {/* Domain Cards — gaya card sambutan dengan pita */}
-        <div className="grid md:grid-cols-3 gap-6 mb-14">
+        <div className="grid md:grid-cols-3 gap-4 sm:gap-5 mb-8 sm:mb-10">
           {domains.map((domain, i) => (
-            <Reveal key={domain.title} delay={i * 100}>
-              <div className="group relative bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all duration-300">
+            <Reveal key={domain.title} delay={i * 90}>
+              <div className="group relative bg-white dark:bg-[#0d1b33] border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-xl sm:rounded-2xl shadow-sm dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-md transition-all duration-300">
                 {/* Left 3D Ribbon — icon di dalam pita */}
-                <div className="absolute left-3 top-0 bottom-[-12px] w-10 rounded-t-lg bg-[#0091ae] dark:bg-[#0091ae] flex flex-col items-center pt-3 z-10 shadow-md">
+                <div className="absolute left-2.5 sm:left-3 top-0 bottom-[-10px] w-8 sm:w-9 rounded-t-lg bg-[#0091ae] dark:bg-[#0091ae] flex flex-col items-center pt-2.5 z-10 shadow-sm">
                   <img
                     src={svgMap[i]}
                     alt={domain.title}
-                    className="w-5 h-5 object-contain"
+                    className="w-4 h-4 object-contain"
                   />
                   {/* 3D Fold */}
-                  <div className="absolute bottom-0 left-full w-0 h-0 border-t-[12px] border-t-[#006377] dark:border-t-[#006377] border-r-[12px] border-r-transparent"></div>
+                  <div className="absolute bottom-0 left-full w-0 h-0 border-t-[10px] border-t-[#006377] dark:border-t-[#006377] border-r-[10px] border-r-transparent"></div>
                 </div>
 
                 {/* Content */}
-                <div className="pl-16 pr-6 py-6 min-h-[180px] flex flex-col justify-center">
-                  <h3 className="font-serif text-lg font-bold text-[#031636] dark:text-white mb-3">
+                <div className="pl-13 sm:pl-14 pr-4 py-4 sm:py-5 min-h-[140px] flex flex-col justify-center">
+                  <h3 className="font-serif text-sm sm:text-base font-bold text-[#031636] dark:text-white mb-1.5">
                     {domain.title}
                   </h3>
-                  <p className="text-sm text-[#44474e] dark:text-[#d3e4fe]/70 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#44474e] dark:text-[#d3e4fe]/70 leading-relaxed">
                     {domain.description}
                   </p>
                 </div>
@@ -202,15 +203,15 @@ export default function Prodi() {
 
         {/* Stats */}
         <Reveal delay={120}>
-          <div className="max-w-xl mx-auto">
-            <div className="bg-white/70 dark:bg-[#0d1b33]/50 backdrop-blur-sm border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-2xl p-6 shadow-md dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-              <div className="flex items-center justify-center gap-10 md:gap-16">
+          <div className="max-w-lg mx-auto">
+            <div className="bg-white/70 dark:bg-[#0d1b33]/50 backdrop-blur-sm border border-[#e5e7eb] dark:border-[#1e3a5f]/40 rounded-xl sm:rounded-2xl p-4 sm:p-5 shadow-xs dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+              <div className="flex items-center justify-center gap-8 md:gap-14">
                 {stats.map((stat) => (
                   <div key={stat.label} className="text-center">
-                    <div className="text-3xl md:text-4xl font-extrabold text-[#005bc1] dark:text-[#60a5fa]">
+                    <div className="text-2xl sm:text-3xl font-extrabold text-[#005bc1] dark:text-[#60a5fa]">
                       {stat.value}
                     </div>
-                    <div className="text-xs md:text-sm text-[#44474e] dark:text-[#d3e4fe]/70 mt-1 font-medium">
+                    <div className="text-[11px] sm:text-xs text-[#44474e] dark:text-[#d3e4fe]/70 mt-1 font-medium">
                       {stat.label}
                     </div>
                   </div>

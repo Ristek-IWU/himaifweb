@@ -6,7 +6,7 @@ import Divisions from './Divisions'
 
 export default function StrukturOrganisasi() {
   return (
-    <section className="min-h-screen bg-[#f0f2f8] dark:bg-gradient-to-br dark:from-[#040d1a] dark:via-[#080f1e] dark:to-[#0a1628] relative overflow-hidden pb-16 md:pb-20">
+    <section className="min-h-screen bg-[#f0f2f8] dark:bg-gradient-to-br dark:from-[#040d1a] dark:via-[#080f1e] dark:to-[#0a1628] relative overflow-hidden pb-12 md:pb-16">
       {/* Map coordinate grid */}
       <div
         className="absolute inset-0 pointer-events-none dark:hidden"
@@ -28,19 +28,19 @@ export default function StrukturOrganisasi() {
           backgroundSize: '48px 48px',
         }}
       />
-      <div className="max-w-[1280px] mx-auto px-6 space-y-6 relative z-10">
-      <StrukturHeader />
-      
-      {/* Hierarchy Levels */}
-      <div className="space-y-6">
-        {/* Tier 1: BPH (Core Leadership + Secretaries/Treasurers merged under one section title) */}
-        <Leadership />
+      <div className="max-w-[1120px] mx-auto px-6 space-y-4 sm:space-y-6 relative z-10">
+        <StrukturHeader />
+        
+        {/* Hierarchy Levels */}
+        <div className="space-y-4 sm:space-y-6">
+          {/* Tier 1: BPH (Core Leadership + Secretaries/Treasurers) */}
+          <Leadership />
 
-        <SecretariesTreasurers />
+          <SecretariesTreasurers />
 
-        {/* Tier 2: Divisions (5 divisions with connectors) */}
-        <Divisions />
-      </div>
+          {/* Tier 2: Divisions (5 divisions with connectors) */}
+          <Divisions />
+        </div>
       </div>
     </section>
   )

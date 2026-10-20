@@ -40,10 +40,10 @@ export const programStudiData = {
         'Penerapan mesin pembelajar untuk solusi cerdas di berbagai sektor industri.',
     },
     {
-      icon: 'security',
-      title: 'Cybersecurity',
+      icon: 'token',
+      title: 'Blockchain',
       description:
-        'Perlindungan aset digital dan keamanan data dalam jaringan global.',
+        'Pengembangan sistem terdesentralisasi, smart contract, dan teknologi Web3 modern.',
     },
   ],
   stats: [

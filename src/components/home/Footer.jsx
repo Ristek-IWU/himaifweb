@@ -17,11 +17,11 @@ export default function Footer() {
     { label: t('navbar.structure'), href: '#vision' },
   ]
 
-  // 4 social platforms always visible in the footer — CMS URL used if available
+  // 2 social platforms visible in the footer (IG & GitHub only)
   const socialLinks = [
     {
       label: 'Instagram',
-      href: orgSocials.instagram || '#',
+      href: orgSocials.instagram || 'https://www.instagram.com/himaif.iwu',
       brandColor: 'text-[#E4405F]',
       svg: (
         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -30,18 +30,8 @@ export default function Footer() {
       ),
     },
     {
-      label: 'LinkedIn',
-      href: orgSocials.linkedin || '#',
-      brandColor: 'text-[#0A66C2]',
-      svg: (
-        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-        </svg>
-      ),
-    },
-    {
       label: 'GitHub',
-      href: orgSocials.github || '#',
+      href: orgSocials.github || 'https://github.com/Ristek-IWU',
       brandColor: 'text-[#f0f6fc]',
       svg: (
         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -49,42 +39,34 @@ export default function Footer() {
         </svg>
       ),
     },
-    {
-      label: 'Twitter',
-      href: orgSocials.twitter || '#',
-      brandColor: 'text-[#e7e9ea]',
-      svg: (
-        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-      ),
-    },
   ]
 
   return (
     <footer className="w-full bg-[#031636] dark:bg-black">
-      <div className="max-w-[1120px] mx-auto px-6 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <div className="max-w-[1120px] mx-auto px-6 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-start">
 
           {/* Kiri (60%): Brand */}
-          <div className="md:col-span-7 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <img src={logoHima} alt="HIMA IF Logo" className="w-8 h-8 object-contain opacity-80" />
-              <span className="text-lg font-serif font-bold text-[#d8e2ff] tracking-tight">
+          <div className="md:col-span-7 space-y-3">
+            <div className="flex items-center gap-2">
+              <img src={logoHima} alt="HIMA IF Logo" className="w-7 h-7 object-contain opacity-85" />
+              <span className="text-base font-serif font-bold text-[#d8e2ff] tracking-tight">
                 HIMAIF <span className="text-[#adc6ff]">SYNAPSE</span>
               </span>
             </div>
-            <p className="text-[#d3e4fe]/50 text-sm leading-relaxed max-w-md">
+            <p className="text-[#d3e4fe]/50 text-xs leading-relaxed max-w-md">
               {t('footer.desc')}
             </p>
             {/* Social Icons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 pt-1">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
                   aria-label={social.label}
-                  className={`w-7 h-7 rounded-md bg-white/5 border border-white/10 flex items-center justify-center ${social.brandColor} hover:bg-white/10 hover:border-white/20 hover:scale-110 transition-all duration-200`}
+                  className={`w-6 h-6 rounded-md bg-white/5 border border-white/10 flex items-center justify-center ${social.brandColor} hover:bg-white/10 hover:border-white/20 hover:scale-110 transition-all duration-200`}
                 >
                   {social.svg}
                 </a>
@@ -94,12 +76,12 @@ export default function Footer() {
 
           {/* Kanan (40%): Quick Links 2x2 Grid */}
           <div className="md:col-span-5">
-            <h5 className="text-white text-xs font-bold uppercase tracking-widest mb-4">{t('footer.quickLinksTitle')}</h5>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
+            <h5 className="text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-3">{t('footer.quickLinksTitle')}</h5>
+            <div className="grid grid-cols-2 gap-x-5 gap-y-2">
               {quickLinks.map((link) => (
                 <a
                   key={link.label}
-                  className="text-[#d3e4fe]/50 text-sm hover:text-[#adc6ff] transition-colors duration-200"
+                  className="text-[#d3e4fe]/50 text-xs hover:text-[#adc6ff] transition-colors duration-200"
                   href={link.href}
                 >
                   {link.label}
@@ -111,11 +93,11 @@ export default function Footer() {
         </div>
 
         {/* Copyright with border-top separator */}
-        <div className="mt-8 pt-5 border-t border-[#005bc1]/20 flex flex-col md:flex-row items-center justify-between gap-2">
-          <p className="text-[#d3e4fe]/30 text-xs">
+        <div className="mt-6 pt-4 border-t border-[#005bc1]/20 flex flex-col md:flex-row items-center justify-between gap-2">
+          <p className="text-[#d3e4fe]/30 text-[11px]">
             © {currentYear} {t('footer.copyright')}
           </p>
-          <div className="flex items-center gap-3 text-[#d3e4fe]/25 text-xs">
+          <div className="flex items-center gap-3 text-[#d3e4fe]/25 text-[11px]">
             <a href="#" className="hover:text-[#adc6ff] transition-colors duration-200">{t('footer.privacyPolicy')}</a>
             <span className="text-[#d3e4fe]/10">·</span>
             <a href="#" className="hover:text-[#adc6ff] transition-colors duration-200">{t('footer.termsOfService')}</a>

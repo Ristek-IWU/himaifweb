@@ -1,21 +1,19 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { translations } from '../locales/translations';
-import { trackLanguageUsage } from '../utils/analyticsTracker';
 
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  // Get active language from localStorage, defaulting to 'ID'
+  // Get active language from localStorage, defaulting to 'ID' (only ID and EN supported)
   const [lang, setLangState] = useState(() => {
-    const saved = localStorage.getItem('himaif_lang') || 'ID';
-    trackLanguageUsage(saved);
-    return saved;
+    const saved = localStorage.getItem('himaif_lang');
+    return (saved === 'ID' || saved === 'EN') ? saved : 'ID';
   });
 
   const setLang = (newLang) => {
-    setLangState(newLang);
-    localStorage.setItem('himaif_lang', newLang);
-    trackLanguageUsage(newLang);
+    const validLang = newLang === 'EN' ? 'EN' : 'ID';
+    setLangState(validLang);
+    localStorage.setItem('himaif_lang', validLang);
   };
 
   // Helper function to resolve nested keys like t('hero.desc')
